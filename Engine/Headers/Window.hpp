@@ -1,11 +1,15 @@
 #pragma once
 
 #include <string>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 namespace Engine {
-	class Window {
+	/**
+	 * @brief Engine::Window class is an abstraction of a cross-platform window that appears in the monitor. 
+	 */
+	class Window final {
 	public:
 		static void Initialize();
 		static void Terminate();
@@ -21,6 +25,8 @@ namespace Engine {
 		int viewport_y;
 		int viewport_width;
 		int viewport_height;
+
+		void glewInit();
 
 	public:
 		Window();
