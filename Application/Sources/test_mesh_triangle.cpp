@@ -1,10 +1,4 @@
-#include <iostream>
-
-#include <Window.hpp>
-#include <Mesh.hpp>
-#include <Material.hpp>
-#include <Renderer.hpp>
-#include <Debug.hpp>
+#include <Engine.hpp>
 
 #ifdef DEBUG_GENERAL
 #define DEBUG
@@ -13,10 +7,8 @@
 using namespace std;
 using namespace Engine;
 
-int test_triangle(int argc, char **argv) {
-	Window::Initialize();
+int test_mesh_triangle(int argc, char **argv) {
 	Window window(800, 600, "test_triangle");
-	window.Viewport(0, 0, 800, 600);
 
 #ifdef DEBUG
 	cout << "[test_triangle] window creation done ..." << endl;
@@ -36,8 +28,8 @@ int test_triangle(int argc, char **argv) {
 #endif
 
 	Material tri_material;
-	const char *tri_vert_path = "Resources\\Shaders\\test_triangle_vertexshader.glsl";
-	const char *tri_frag_path = "Resources\\Shaders\\test_triangle_fragmentshader.glsl";
+	const char *tri_vert_path = "Resources\\Shaders\\test_mesh_triangle_vertexshader.glsl";
+	const char *tri_frag_path = "Resources\\Shaders\\test_mesh_triangle_fragmentshader.glsl";
 	tri_material.UseShaders(tri_vert_path, tri_frag_path);
 
 #ifdef DEBUG
@@ -58,7 +50,6 @@ int test_triangle(int argc, char **argv) {
 		window.SwapBuffers();
 		glfwPollEvents();
 	}
-	Window::Terminate();
 
 	return 0;
 }
