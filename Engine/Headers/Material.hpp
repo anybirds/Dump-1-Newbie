@@ -60,6 +60,8 @@ namespace Engine {
 		GLuint CompileShader(const char *path, GLenum type);
 	public:
 		Material();
+		Material(const string &vert_path, const string &frag_path);
+		Material(const string &vert_path, const string &geom_path, const string &frag_path);
 		~Material();
 
 		/**
@@ -67,8 +69,8 @@ namespace Engine {
 		 * @details UseShaders method automatically compiles the given shaders and attach it to a generated program object, which gets linked right after.
 		 * @todo Come up with a method that automatically detects whether if the shader specified by the given path already exists, therefore no need to compile.
 		 */
-		void UseShaders(const char *vert_path, const char *frag_path);
-		void UseShaders(const char *vert_path, const char *geom_path, const char *frag_path);
+		void UseShaders(const string &vert_path, const string &frag_path);
+		void UseShaders(const string &vert_path, const string &geom_path, const string &frag_path);
 
 		friend class Renderer;
 	};

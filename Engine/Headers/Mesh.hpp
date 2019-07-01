@@ -25,13 +25,13 @@ namespace Engine {
 
 	public:
 		Mesh(unsigned vnum, const vec3 pos[]);
-		Mesh(unsigned vnum, const vec3 pos[], unsigned inum, const unsigned indices[]);
+		Mesh(unsigned vnum, const vec3 pos[], unsigned inum, const unsigned idx[]);
 		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[]);
-		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[], unsigned inum, const unsigned indices[]);
+		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[], unsigned inum, const unsigned idx[]);
 		Mesh(unsigned vnum, const vec3 pos[], const vec2 uv[]);
-		Mesh(unsigned vnum, const vec3 pos[], const vec2 uv[], unsigned inum, const unsigned indices[]);
+		Mesh(unsigned vnum, const vec3 pos[], const vec2 uv[], unsigned inum, const unsigned idx[]);
 		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[], const vec2 uv[]);
-		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[], const vec2 uv[], unsigned inum, const unsigned indices[]);
+		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[], const vec2 uv[], unsigned inum, const unsigned idx[]);
 		Mesh(string path);
 		~Mesh();
 

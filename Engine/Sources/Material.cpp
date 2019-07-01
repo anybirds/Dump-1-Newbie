@@ -11,8 +11,16 @@ Material::Material() {
 
 }
 
-Material::~Material() {
+Material::Material(const string &vert_path, const string &frag_path) {
+	UseShaders(vert_path, frag_path);
+}
 
+Material::Material(const string &vert_path, const string &geom_path, const string &frag_path) {
+	UseShaders(vert_path, geom_path, frag_path);
+}
+
+Material::~Material() {
+	glDeleteProgram(program);
 }
 
 GLuint Material::CompileShader(const char *path, GLenum type) {
@@ -57,7 +65,7 @@ GLuint Material::CompileShader(const char *path, GLenum type) {
 	return shader;
 }
 
-void Material::UseShaders(const char *vert_path, const char *frag_path) {
+void Material::UseShaders(const string &vert_path, const string &frag_path) {
 	// Delete the program that is alreay linked
 	// todo: this is terribly inefficient when there alreay is a compiled version of vertex and fragment shaders. 
 	glDeleteProgram(program);
@@ -67,8 +75,8 @@ void Material::UseShaders(const char *vert_path, const char *frag_path) {
 
 	// Compile shaders
 	try {
-		vert_shader = CompileShader(vert_path, GL_VERTEX_SHADER);
-		frag_shader = CompileShader(frag_path, GL_FRAGMENT_SHADER);
+		vert_shader = CompileShader(vert_path.c_str(), GL_VERTEX_SHADER);
+		frag_shader = CompileShader(frag_path.c_str(), GL_FRAGMENT_SHADER);
 	}
 	catch (exception& e) {
 		cout << e.what() << endl;
@@ -84,6 +92,6 @@ void Material::UseShaders(const char *vert_path, const char *frag_path) {
 	glDeleteShader(frag_shader);
 }
 
-void Material::UseShaders(const char *vert_path, const char *geom_path, const char *frag_path) {
+void Material::UseShaders(const string &vert_path, const string &geom_path, const string &frag_path) {
 
 }

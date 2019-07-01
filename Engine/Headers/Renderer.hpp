@@ -11,10 +11,11 @@
 namespace Engine {
 	class Renderer final {
 	private:
-		Mesh *mesh;
-		Material *material;
+		const Mesh *mesh;
+		const Material *material;
+
 	public:
-		Renderer(Mesh *mesh, Material *material);
+		Renderer(const Mesh &mesh, const Material &material);
 		~Renderer();
 
 		void Render();
