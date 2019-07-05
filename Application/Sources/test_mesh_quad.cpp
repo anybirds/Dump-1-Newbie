@@ -45,7 +45,7 @@ int test_mesh_quad(int argc, char **argv) {
 
 
 #ifdef DEBUG
-	cout << '[' << __FUNCTION__ << ']' << " renderer ready ... " << endl;
+	cout << '[' << __FUNCTION__ << ']' << " renderer configuration done ... " << endl;
 #endif
 
 	while (!window.Closed()) {

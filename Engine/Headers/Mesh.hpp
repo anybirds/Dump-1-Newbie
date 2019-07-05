@@ -32,7 +32,7 @@ namespace Engine {
 		Mesh(unsigned vnum, const vec3 pos[], const vec2 uv[], unsigned inum, const unsigned idx[]);
 		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[], const vec2 uv[]);
 		Mesh(unsigned vnum, const vec3 pos[], const vec3 normal[], const vec2 uv[], unsigned inum, const unsigned idx[]);
-		Mesh(string path);
+		explicit Mesh(string path);
 		~Mesh();
 
 		friend class Renderer;

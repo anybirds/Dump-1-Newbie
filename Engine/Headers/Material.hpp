@@ -67,7 +67,7 @@ namespace Engine {
 		/**
 		 * @brief UseShaders method enables using the linked program with the provided shaders attached.
 		 * @details UseShaders method automatically compiles the given shaders and attach it to a generated program object, which gets linked right after.
-		 * @todo Come up with a method that automatically detects whether if the shader specified by the given path already exists, therefore no need to compile.
+		 * @todo Come up with a method that automatically detects whether if the shader specified by the given path already exists, therefore no need to recompile.
 		 */
 		void UseShaders(const string &vert_path, const string &frag_path);
 		void UseShaders(const string &vert_path, const string &geom_path, const string &frag_path);

@@ -37,7 +37,7 @@ int test_mesh_triangle(int argc, char **argv) {
 	Renderer tri_renderer(tri_mesh, tri_material);
 
 #ifdef DEBUG
-	cout << '[' << __FUNCTION__ << ']' << " renderer ready ... " << endl;
+	cout << '[' << __FUNCTION__ << ']' << " renderer configuration done ... " << endl;
 #endif
 
 	while (!window.Closed()) {
