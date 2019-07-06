@@ -2,6 +2,8 @@
 
 using namespace Engine;
 
+const Engine::Camera *Renderer::camera = nullptr;
+
 Renderer::Renderer(const Mesh &mesh, const Material &material) : mesh(&mesh), material(&material), transform() {
 	
 }
@@ -18,11 +20,21 @@ void Renderer::Render() {
 	glBindVertexArray(mesh->vao);
 
 	glUseProgram(material->program);
+	GLuint location;
 	if (transform) {
 		// object with transform 
-		GLuint location = glGetUniformLocation(material->program, "model_transform");
-		mat4 matrix = transform->Matrix();
-		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&matrix);
+		location = glGetUniformLocation(material->program, "model_transform");
+		mat4 model_transform = transform->Matrix();
+		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&model_transform);
+	}
+	if (camera) {
+		// render with scene camera
+		location = glGetUniformLocation(material->program, "camera_transform");
+		mat4 camera_transform = camera->Transform().Matrix();
+		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&camera_transform);
+		location = glGetUniformLocation(material->program, "normalization");
+		mat4 normalization = camera->Normalization();
+		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&normalization);
 	}
 
 	if (!mesh->inum) {

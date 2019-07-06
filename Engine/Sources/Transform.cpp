@@ -17,6 +17,10 @@ Transform::Transform(const Transform &parent, const vec3 &position, const mat4 &
 	
 }
 
+Transform::~Transform() {
+
+}
+
 mat4 Transform::Matrix() const {
 	mat4 T = glm::translate(mat4(1.0f), position);
 	mat4 R = rotation;

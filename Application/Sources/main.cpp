@@ -1,5 +1,5 @@
 #include <test.hpp>
 
 int main(int argc, char **argv) {
-	return test_transform(argc, argv);
+	return test_camera(argc, argv);
 }

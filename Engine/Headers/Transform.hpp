@@ -11,7 +11,7 @@ namespace Engine {
 	/**
 	 * @brief Engine::Transform class
 	 */
-	class Transform {
+	class Transform final {
 	private:
 		static const mat4 default_transform;
 		static const vec3 default_position;
@@ -27,6 +27,7 @@ namespace Engine {
 	public:
 		Transform(const vec3 &position = default_position, const mat4 &rotation = default_rotation, const vec3 &scale = default_scale);
 		Transform(const Transform &parent, const vec3 &position = default_position, const mat4 &rotation = default_rotation, const vec3 &scale = default_scale);
+		~Transform();
 
 		vec3 Position() const { return position; }
 		void Position(const vec3 &position) { this->position = position; }
