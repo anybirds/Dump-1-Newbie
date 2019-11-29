@@ -15,7 +15,7 @@ target_include_directories(Application
   PRIVATE Sources
 )
 
-target_link_libraries(Application Engine glfw GLEW::GLEW ${OPENGL_LIBRARY} glm)
+target_link_libraries(Application Engine glfw GLEW::GLEW ${OPENGL_LIBRARY} glm assimp::assimp)
 
 set_target_properties(
   Application PROPERTIES

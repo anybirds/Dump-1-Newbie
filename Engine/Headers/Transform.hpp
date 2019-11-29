@@ -33,6 +33,9 @@ namespace Engine {
 		void Position(const vec3 &position) { this->position = position; }
 		mat4 Rotation() const { return rotation; }
 		void Rotation(const mat4 &rotation) { this->rotation = rotation; }
+		vec3 Scale() const { return scale; }
+		void Scale(const vec3 &scale) { this->scale = scale; }
+
 		/**
 		 * @brief Matrix method computes transform's 4*4 matrix representation. 
 		 * @todo Lazy computation of transform matrix.
