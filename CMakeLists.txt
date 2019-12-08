@@ -11,6 +11,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(Assimp REQUIRED)
+find_package(SOIL CONFIG REQUIRED)
 
 add_subdirectory(Application)
 add_subdirectory(Engine)

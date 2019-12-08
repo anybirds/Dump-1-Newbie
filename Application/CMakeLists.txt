@@ -1,21 +1,19 @@
 project(application_project)
 
-file(GLOB APP_HEADER "Headers/*.hpp")
-file(GLOB APP_SOURCE "Sources/*.cpp")
+file(GLOB_RECURSE APP_SOURCE "*.hpp" "*.cpp")
 
 if(MSVC)
-  source_group("Headers" FILES ${APP_HEADER})
-  source_group("Sources" FILES ${APP_SOURCE})
+  source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${APP_SOURCE})
 endif()
 
-add_executable(Application ${APP_SOURCE} ${APP_HEADER})
+add_executable(Application ${APP_SOURCE})
 
 target_include_directories(Application
-  PUBLIC Headers
-  PRIVATE Sources
+  PUBLIC Header
+  PRIVATE Source
 )
 
-target_link_libraries(Application Engine glfw GLEW::GLEW ${OPENGL_LIBRARY} glm assimp::assimp)
+target_link_libraries(Application Engine glfw GLEW::GLEW ${OPENGL_LIBRARY} glm assimp::assimp SOIL)
 
 set_target_properties(
   Application PROPERTIES

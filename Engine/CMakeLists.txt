@@ -1,18 +1,16 @@
 project(engine_project)
 
-file(GLOB ENGINE_HEADER "Headers/*.hpp")
-file(GLOB ENGINE_SOURCE "Sources/*.cpp")
+file(GLOB_RECURSE ENGINE_SOURCE "*.hpp" "*.cpp")
 
 if(MSVC)
-  source_group("Headers" FILES ${ENGINE_HEADER})
-  source_group("Sources" FILES ${ENGINE_SOURCE})
+  source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${ENGINE_SOURCE})
 endif()
 
-add_library(Engine ${ENGINE_SOURCE} ${ENGINE_HEADER})
+add_library(Engine ${ENGINE_SOURCE})
 
 target_include_directories(Engine
-  PUBLIC Headers
-  PRIVATE Sources
+  PUBLIC Header
+  PRIVATE Source
 )
 
 target_link_libraries(Engine glfw GLEW::GLEW ${OPENGL_LIBRARY} glm)
