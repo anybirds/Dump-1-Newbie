@@ -9,8 +9,7 @@ endif()
 add_library(Engine ${ENGINE_SOURCE})
 
 target_include_directories(Engine
-  PUBLIC Header
-  PRIVATE Source
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(Engine glfw GLEW::GLEW ${OPENGL_LIBRARY} glm)

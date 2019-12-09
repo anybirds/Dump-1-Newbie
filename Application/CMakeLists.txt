@@ -9,8 +9,7 @@ endif()
 add_executable(Application ${APP_SOURCE})
 
 target_include_directories(Application
-  PUBLIC Header
-  PRIVATE Source
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(Application Engine glfw GLEW::GLEW ${OPENGL_LIBRARY} glm assimp::assimp SOIL)
