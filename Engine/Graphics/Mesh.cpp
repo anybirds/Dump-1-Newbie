@@ -7,12 +7,12 @@
 
 using namespace Engine;
 
-Mesh::Mesh(const MeshDetail &mesh) : vcnt(mesh.VertexCount()), icnt(mesh.IndexCount()) {
-	unsigned acnt = mesh.AttributeCount();
+Mesh::Mesh(const MeshDetail &mesh) : vcnt(mesh.VertexCount), icnt(mesh.IndexCount) {
+	unsigned acnt = mesh.AttributeCount;
 
-	const float *vert = mesh.Vertices();
-	const unsigned *attrib = mesh.Attributes();
-	const unsigned *idx = mesh.Indices();
+	const float *vert = mesh.Vertices;
+	const unsigned *attrib = mesh.Attributes;
+	const unsigned *idx = mesh.Indices;
 
 #ifdef DEBUG
 	cout << '[' << __FUNCTION__ << ']' 

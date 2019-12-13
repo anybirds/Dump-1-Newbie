@@ -11,13 +11,8 @@
 using namespace glm;
 using namespace Engine;
 
-const Engine::Camera *Renderer::camera = nullptr;
-
-Renderer::Renderer(const Mesh &mesh, const Material &material) : mesh(&mesh), material(&material), transform() {
-	
-}
-
-Renderer::Renderer(const Mesh &mesh, const Material &material, const Transform &transform) : mesh(&mesh), material(&material), transform(&transform) {
+Renderer::Renderer(const RendererDetail &renderer)
+	: mesh(renderer.Mesh), material(renderer.Material) {
 
 }
 
@@ -36,13 +31,13 @@ void Renderer::Render() {
 		mat4 model_transform = transform->Matrix();
 		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&model_transform);
 	}
-	if (camera) {
+	if (CameraObject::Current()) {
 		// render with scene camera
 		location = glGetUniformLocation(material->program, "camera_transform");
-		mat4 camera_transform = camera->Transform().Matrix();
+		mat4 camera_transform = CameraObject::Current()->Transform().Matrix();
 		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&camera_transform);
 		location = glGetUniformLocation(material->program, "camera_normalization");
-		mat4 normalization = camera->Normalization();
+		mat4 normalization = CameraObject::Current()->Camera().Normalization();
 		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&normalization);
 	}
 

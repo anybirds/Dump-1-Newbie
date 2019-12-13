@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 
 namespace Engine {
+
 	class ShaderCreationException final : public std::exception {
 	public:
 		const char *what() const noexcept {
@@ -47,6 +48,11 @@ namespace Engine {
 		}
 	};
 
+	struct MaterialDetail {
+		const char *VertexShaderName;
+		const char *FragmentShaderName;
+	};
+
 	/*
 	Material
 
@@ -60,7 +66,7 @@ namespace Engine {
 
 		GLuint CompileShader(const char *path, GLenum type);
 	public:
-		Material(const std::string &vert_path, const std::string &frag_path);
+		explicit Material(const MaterialDetail &material);
 		virtual ~Material();
 		virtual void Update() = 0;
 

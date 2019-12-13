@@ -8,8 +8,6 @@
 using namespace std;
 using namespace Engine;
 
-unsigned Window::window_cnt = 0;
-
 void Window::glfwInit() {
 	::glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -43,67 +41,31 @@ void Window::glewInit() {
 	}
 }
 
-Window::Window() {
-	if (!window_cnt) {
-		Window::glfwInit();
+Window::Window(const WindowDetail &window) 
+	: width(window.Width), height(window.Height), name(window.Name) {
+	Window::glfwInit();
+
+	if (!width && !height) {
+		// full-screen window
+		GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+		const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+		width = mode->width;
+		height = mode->height;
 	}
 
-	monitor = glfwGetPrimaryMonitor();
-	const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-	width = mode->width;
-	height = mode->height;
-	name = "No Title";
-	window = glfwCreateWindow(width, height, name.c_str(), monitor, NULL);
-	glfwMakeContextCurrent(window);
+	if (name.empty()) {
+		name = "No Title";
+	}
+
+	this->window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
+	glfwMakeContextCurrent(this->window);
 
 	Window::glewInit();
 	Viewport(0, 0, width, height);
-
-	window_cnt++;
-}
-
-Window::Window(const string &name) 
-	: name(name) {
-	if (!window_cnt) {
-		Window::glfwInit();
-	}
-
-	monitor = glfwGetPrimaryMonitor();
-	const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-	width = mode->width;
-	height = mode->height;
-	window = glfwCreateWindow(mode->width, mode->height, name.c_str(), NULL, NULL);
-	glfwMakeContextCurrent(window);
-
-	Window::glewInit();
-	Viewport(0, 0, width, height);
-
-	window_cnt++;
-}
-
-Window::Window(int width, int height, string name) 
-	: width(width), height(height), name(name) {
-	if (!window_cnt) {
-		Window::glfwInit();
-	}
-
-	monitor = glfwGetPrimaryMonitor();
-	window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
-	glfwMakeContextCurrent(window);
-
-	Window::glewInit();
-	Viewport(0, 0, width, height);
-
-	window_cnt++;
 }
 
 Window::~Window() {
 	glfwDestroyWindow(window);
-	
-	window_cnt--;
-	if (window_cnt) {
-		Window::glfwTerminate();
-	}
 }
 
 void Window::SetActive() {

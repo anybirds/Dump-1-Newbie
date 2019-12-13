@@ -4,6 +4,14 @@
 #include <glm/glm.hpp>
 
 namespace Engine {	
+
+	struct TransformDetail {
+		glm::vec3 Position;
+		glm::mat4 Rotation;
+		glm::vec3 Scale;
+		const class Transform *Parent;
+	};
+
 	/*
 	Transform
 
@@ -11,32 +19,24 @@ namespace Engine {
 	 */
 	class Transform final {
 	private:
-		static const glm::mat4 default_transform;
-		static const glm::vec3 default_position;
-		static const glm::mat4 default_rotation;
-		static const glm::vec3 default_scale;
-
-	private:
 		glm::vec3 position;
 		glm::mat4 rotation;
 		glm::vec3 scale;
 		const Transform *parent;
 
 	public:
-		Transform(const glm::vec3 &position = default_position, const glm::mat4 &rotation = default_rotation, const glm::vec3 &scale = default_scale);
-		Transform(const Transform &parent, const glm::vec3 &position = default_position, const glm::mat4 &rotation = default_rotation, const glm::vec3 &scale = default_scale);
+		explicit Transform(const TransformDetail &transform);
 		~Transform();
 
 		glm::vec3 Position() const { return position; }
-		void Position(const glm::vec3 &position) { this->position = position; }
+		Transform& Position(const glm::vec3 &position) { this->position = position; return *this; }
 		glm::mat4 Rotation() const { return rotation; }
-		void Rotation(const glm::mat4 &rotation) { this->rotation = rotation; }
+		Transform& Rotation(const glm::mat4 &rotation) { this->rotation = rotation; return *this; }
 		glm::vec3 Scale() const { return scale; }
-		void Scale(const glm::vec3 &scale) { this->scale = scale; }
+		Transform& Scale(const glm::vec3 &scale) { this->scale = scale; return *this; }
 
-		/**
-		 * @brief Matrix method computes transform's 4*4 matrix representation. 
-		 * @todo Lazy computation of transform matrix.
+		/*
+		Computes transform's 4*4 matrix representation. 
 		 */
 		glm::mat4 Matrix() const;
 	};

@@ -9,6 +9,11 @@
 #include <Graphics/Mesh.hpp>
 
 namespace Engine {
+
+	struct ModelDetail {
+		const char *ModelName;
+	};
+
 	/*
 	Model imported by using assimp library
 	
@@ -24,11 +29,11 @@ namespace Engine {
 		float *vert;
 		unsigned *attrib;
 		unsigned *idx;
-		MeshDetail mesh;
+		MeshDetail *mesh;
 		
 	public:
-		Model(std::string path);
+		explicit Model(const ModelDetail &model);
 		~Model();
-		MeshDetail Mesh() const { return mesh; }
+		MeshDetail& MeshDetail() const { return *mesh; }
 	};
 }

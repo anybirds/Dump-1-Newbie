@@ -6,6 +6,13 @@
 #include <GLFW/glfw3.h>
 
 namespace Engine {
+
+	struct WindowDetail {
+		int Width;
+		int Height;
+		string Name;
+	};
+
 	/*
 	Window
 
@@ -13,15 +20,12 @@ namespace Engine {
 	 */
 	class Window final {
 	private:
-		static unsigned window_cnt;
-
 		static void glfwInit();
 		static void glfwTerminate();
 		static void glewInit();
 
-	private:
+	public:
 		GLFWwindow *window;
-		GLFWmonitor *monitor;
 		int width;
 		int height;
 		std::string name;
@@ -32,17 +36,15 @@ namespace Engine {
 		int viewport_height;
 
 	public:
-		Window();
-		explicit Window(const std::string &name);
-		Window(int width, int height, std::string name);
+		explicit Window(const WindowDetail &window);
 		~Window();
 
 		int Width() const { return width; };
-		void Width(int width) { this->width = width; };
+		Window& Width(int width) { this->width = width; return *this; };
 		int Height() const { return height; };
-		void Height(int height) { this->height = height; };
+		Window& Height(int height) { this->height = height; return *this; };
 		const std::string &Name() const { return name; };
-		void Name(const std::string &name) { this->name = name; };
+		Window& Name(const std::string &name) { this->name = name; return *this; };
 
 		void SetActive();
 		void Viewport(int viewport_x, int viewport_y, int viewport_width, int viewport_height);

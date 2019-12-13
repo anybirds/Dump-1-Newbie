@@ -12,13 +12,13 @@
 using namespace Assimp;
 using namespace Engine;
 
-Model::Model(std::string path) : vert(nullptr), attrib(nullptr), idx(nullptr), mesh() {
+Model::Model(const ModelDetail &model) : vert(nullptr), attrib(nullptr), idx(nullptr), mesh(nullptr) {
 	Importer importer;
-	scene = importer.ReadFile(path.c_str(), aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals);
+	scene = importer.ReadFile(model.ModelName, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 #ifdef DEBUG
-		cout << '[' << __FUNCTION__ << ']' << " cannot open file: " << path << '\n';
+		cout << '[' << __FUNCTION__ << ']' << " cannot open file: " << model.ModelName << '\n';
 #endif
 		return;
 	}
@@ -78,13 +78,12 @@ Model::Model(std::string path) : vert(nullptr), attrib(nullptr), idx(nullptr), m
 		idx[base + 2] = aimesh->mFaces[i].mIndices[2];
 	}
 
-	mesh.VertexCount(vcnt).Vertices(vert)
-		.AttributeCount(acnt).Attributes(attrib)
-		.IndexCount(icnt).Indices(idx);
+	mesh = new Engine::MeshDetail{ vcnt, vert, acnt, attrib, icnt, idx };
 }
 
 Model::~Model() {
 	delete[] vert;
 	delete[] attrib;
 	delete[] idx;
+	delete[] mesh;
 }

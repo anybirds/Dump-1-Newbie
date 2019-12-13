@@ -5,6 +5,11 @@
 #include <GL/glew.h>
 
 namespace Engine {
+
+	struct TextureDetail {
+		const char *TextureName;
+	};
+
 	/*
 	Texture
 	
@@ -15,7 +20,7 @@ namespace Engine {
 		GLuint name;
 
 	public:
-		Texture(const std::string &path);
+		explicit Texture(const TextureDetail &texture);
 		~Texture();
 		GLuint Name() const { return name; }
 	};
