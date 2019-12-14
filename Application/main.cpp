@@ -12,13 +12,18 @@ using namespace glm;
 using namespace Engine;
 
 int main(int argc, char **argv) {
-	Window window({ 800, 600, __FUNCTION__ });
+	// replace this code block to Engine::Init();
+	Window window({ 800, 600, __FUNCTION__ }); // replace this code to Window::Init({});
+	Time::Init();
+	Resource::Init(); // replace this to Resource::Init({""});
 
-	Resource::Load();
-	Scene scene; // replace this to Scene scene("");
+	Scene scene; // replace this to Scene scene({""});
+
 	scene.Start();
 
 	while (!window.Closed()) {
+		Time::Update();
+
 		scene.Update();
 		scene.Render();
 		

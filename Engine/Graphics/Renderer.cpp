@@ -3,6 +3,7 @@
 
 #include <Core/Debug.hpp>
 #include <Core/Resource.hpp>
+#include <Core/Scene.hpp>
 #include <Graphics/Renderer.hpp>
 
 #ifdef DEBUG_GRAPHICS
@@ -13,19 +14,20 @@ using namespace glm;
 using namespace Engine;
 
 Renderer::Renderer(const Detail &renderer)
-	: mesh(&Resource::FindMesh(renderer.MeshName)), material(&Resource::FindMaterial(renderer.MaterialName)) {
-
+	: Component(renderer.Component), 
+	mesh(&Resource::FindMesh(renderer.MeshName)), material(&Resource::FindMaterial(renderer.MaterialName)) {
+	Object().Scene().renderer.insert(this);
 }
 
 Renderer::~Renderer() {
-	
+	Object().Scene().renderer.erase(this);
 }
 
 void Renderer::Render() {
 	glBindVertexArray(mesh->vao);
 
 	glUseProgram(material->program);
-	material->Update();
+	material->Uniform();
 
 	GLuint location;
 

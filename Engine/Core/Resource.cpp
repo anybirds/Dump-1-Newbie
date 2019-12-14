@@ -13,6 +13,27 @@ using namespace Engine;
 
 Resource Resource::resource;
 
+void Resource::Init() {
+	resource.model.insert({ "Bunny", new Model({"Resource\\Model\\bunny_model.obj"}) });
+
+	resource.mesh.insert({ "Square", new Mesh(Geometry::Square) });
+	resource.mesh.insert({ "Bunny", new Mesh(FindModel("Bunny").MeshDetail()) });
+
+	resource.texture.insert({ "Bunny", new Texture({"Resource\\Texture\\bunny_texture.png"}) });
+
+	resource.material.insert({ "Bunny",
+		new DefaultMaterial({
+			"Resource\\Shader\\test_graphics_vert.glsl" ,
+			"Resource\\Shader\\test_graphics_frag.glsl" ,
+			"Bunny"
+			})
+		});
+
+#ifdef DEBUG
+	cout << '[' << __FUNCTION__ << ']' << " Resource loaded." << endl;
+#endif
+}
+
 Material& Resource::FindMaterial(const string& name) {
 	return *resource.material.find(name)->second;
 }
@@ -33,28 +54,6 @@ Material& Resource::FindMaterial(const string& name) {
 
 Texture& Resource::FindTexture(const string& name) {
 	return *resource.texture.find(name)->second;
-}
-
-void Resource::Load() {
-	resource.model.insert({ "Bunny", new Model({"Resource\\Model\\bunny_model.obj"}) });
-
-	resource.mesh.insert({ "Square", new Mesh(Geometry::Square) });
-	resource.mesh.insert({ "Bunny", new Mesh(FindModel("Bunny").MeshDetail()) });
-
-	resource.texture.insert({ "Bunny", new Texture({"Resource\\Texture\\bunny_texture.png"}) });
-
-	resource.material.insert({ "Bunny",
-		new DefaultMaterial({
-			"Resource\\Shader\\test_graphics_vert.glsl" ,
-			"Resource\\Shader\\test_graphics_frag.glsl" ,
-			"Bunny"
-			})
-		});
-
-#ifdef DEBUG
-	cout << '[' << __FUNCTION__ << ']' << " Resource loaded." << endl;
-#endif
-
 }
 
 Resource::Resource() 

@@ -13,6 +13,8 @@
 #include <Core/Object.hpp>
 #include <Core/Resource.hpp>
 #include <Core/Scene.hpp>
+#include <Core/Script.hpp>
+#include <Core/Time.hpp>
 #include <Core/Transform.hpp>
 
 #include <Graphics/Camera.hpp>

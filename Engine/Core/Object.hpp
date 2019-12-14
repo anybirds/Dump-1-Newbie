@@ -8,20 +8,25 @@
 #include <Core/Transform.hpp>
 
 namespace Engine {
+	
+	class Scene;
 
 	/*
 	Object
 
 	An abstraction of an object in the scene.
+	Has Components that can describe the object behavior.
 	 */
 	class Object final {
 	private:
+		Engine::Scene *scene;
 		std::string name;
 		Transform transform;
-		std::map<size_t, Engine::Component*> component; // <hash_code, Component>
-
+		std::map<size_t, Component*> component; // <hash_code, Component>
+		
 	public:
 		struct Detail {
+			Engine::Scene *Scene;
 			const char *Name;
 			Transform::Detail Transform;
 		};
@@ -33,10 +38,12 @@ namespace Engine {
 		ComponentType& GetComponent(); 
 
 		template <typename ComponentType>
-		Object& SetComponent(const typename ComponentType::Detail &component); 
+		Object& AddComponent(const typename ComponentType::Detail &component); 
 
+		Engine::Transform& Transform() { return transform; }
 		const Engine::Transform& Transform() const { return transform; }
 		Object& Transform(const Engine::Transform& transform) { this->transform = transform; return *this; }
+		Engine::Scene& Scene() const { return *scene; }
 	};
 
 	template <typename ComponentType>
@@ -50,11 +57,10 @@ namespace Engine {
 	}
 
 	template <typename ComponentType>
-	Object& Object::SetComponent(const typename ComponentType::Detail &component) {
+	Object& Object::AddComponent(const typename ComponentType::Detail &component) {
 		size_t key = typeid(ComponentType).hash_code();
 		ComponentType *value = new ComponentType(component);
 		this->component.insert({ key, value });
-		value->Object(*this);
 		return *this;
 	}
 }

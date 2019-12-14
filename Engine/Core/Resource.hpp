@@ -14,12 +14,12 @@ namespace Engine {
 		static Resource resource;
 
 	public:
+		static void Init();
 		static Material& FindMaterial(const string& name);
 		static Model& FindModel(const string& name);
 		static Mesh& FindMesh(const string& name);
 		//static Shader& FindShader(const string& name);
 		static Texture& FindTexture(const string& name);
-		static void Load();
 
 	private:
 		std::unordered_map<std::string, Material*> material;
@@ -31,6 +31,10 @@ namespace Engine {
 		Resource();
 
 	public:
+		Resource(const Resource &) = delete;
+		Resource(Resource&&) = delete;
+		Resource& operator=(const Resource &) = delete;
+		Resource& operator=(Resource&&) = delete;
 		~Resource();
 	};
 }

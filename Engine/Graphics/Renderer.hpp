@@ -8,9 +8,9 @@
 namespace Engine {
 
 	/*
-	Renderer
+	Renderer Component
 
-	Draw an object that has mesh and material.
+	Responsible for rendering objects that have Mesh and Material.
 	*/
 	class Renderer final : public Component {
 	private:
@@ -19,6 +19,7 @@ namespace Engine {
 
 	public:
 		struct Detail {
+			Component::Detail Component;
 			const char *MeshName;
 			const char *MaterialName;
 		};

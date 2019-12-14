@@ -8,7 +8,7 @@
 namespace Engine {
 
 	/*
-	Camera
+	Camera Component
 
 	Featured by its normalization matrix. 
 	Specify camera properties by directly manipulating the normalization matrix.
@@ -27,8 +27,10 @@ namespace Engine {
 
 	public:
 		struct Detail {
+			Component::Detail Component;
 			glm::mat4 Normalization;
 		};
+
 		explicit Camera(const Detail &camera);
 		~Camera();
 		

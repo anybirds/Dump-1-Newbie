@@ -39,6 +39,7 @@ void Window::glewInit() {
 		cout << '[' << __FUNCTION__ << ']' << " message: " << glewGetErrorString(glew_error) << '\n';
 		exit(1);
 	}
+	glEnable(GL_DEPTH_TEST); // move this to framebuffer specification
 }
 
 Window::Window(const Detail &window) 
@@ -92,4 +93,5 @@ bool Window::Closed() {
 
 void Window::SwapBuffers() {
 	glfwSwapBuffers(window);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // move this to framebuffer specification
 }

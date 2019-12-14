@@ -1,10 +1,11 @@
-#include <Engine.hpp>
+#pragma once
 
-using namespace Engine;
+#include <Graphics/Material.hpp>
+#include <Graphics/Texture.hpp>
 
-class DefaultMaterial final : public Material {
+class DefaultMaterial final : public Engine::Material {
 private:
-	const Texture *texture;
+	const Engine::Texture *texture;
 
 public:
 	struct Detail {
@@ -14,6 +15,6 @@ public:
 	};
 	DefaultMaterial(const Detail &default_material);
 	~DefaultMaterial();
-	virtual void Update() const;
+	virtual void Uniform() const;
 	DefaultMaterial& Texture(const Engine::Texture &texture) { this->texture = &texture; return *this; }
 };

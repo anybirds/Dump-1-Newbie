@@ -1,4 +1,7 @@
 #include <Material/DefaultMaterial.hpp>
+#include <Engine.hpp>
+
+using namespace Engine;
 
 DefaultMaterial::DefaultMaterial(const Detail &default_material) 
 	: Material(Material::Detail{default_material.VertexShaderName, default_material.FragmentShaderName}), 
@@ -6,7 +9,7 @@ DefaultMaterial::DefaultMaterial(const Detail &default_material)
 
 }
 
-void DefaultMaterial::Update() const {
+void DefaultMaterial::Uniform() const {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->Name());
 }

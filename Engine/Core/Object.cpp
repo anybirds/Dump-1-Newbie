@@ -2,7 +2,7 @@
 
 using namespace Engine;
 
-Object::Object(const Detail &object) : name(object.Name), transform(object.Transform) {
+Object::Object(const Detail &object) : scene(object.Scene), name(object.Name), transform(object.Transform) {
 	
 }
 

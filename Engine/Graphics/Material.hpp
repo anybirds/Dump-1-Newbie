@@ -68,7 +68,7 @@ namespace Engine {
 
 		explicit Material(const Detail &material);
 		virtual ~Material();
-		virtual void Update() const = 0;
+		virtual void Uniform() const = 0;
 
 		friend class Renderer;
 	};
