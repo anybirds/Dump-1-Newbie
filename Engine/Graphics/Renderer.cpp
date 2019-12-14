@@ -28,19 +28,19 @@ void Renderer::Render() {
 	material->Update();
 
 	GLuint location;
-	if (transform) {
-		// object with transform 
-		location = glGetUniformLocation(material->program, "model_transform");
-		mat4 model_transform = transform->Matrix();
-		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&model_transform);
-	}
-	if (CameraObject::Current()) {
+
+	// object must have transform
+	location = glGetUniformLocation(material->program, "model_transform");
+	mat4 model_transform = Object().Transform().Matrix();
+	glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&model_transform);
+
+	if (Camera::Current()) {
 		// render with scene camera
 		location = glGetUniformLocation(material->program, "camera_transform");
-		mat4 camera_transform = CameraObject::Current()->Transform().Matrix();
+		mat4 camera_transform = Camera::Current()->Object().Transform().Matrix();
 		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&camera_transform);
 		location = glGetUniformLocation(material->program, "camera_normalization");
-		mat4 normalization = CameraObject::Current()->Camera().Normalization();
+		mat4 normalization = Camera::Current()->Normalization();
 		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&normalization);
 	}
 

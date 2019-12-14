@@ -1,15 +1,13 @@
 #pragma once
 
-#include <Core/CameraObject.hpp>
-#include <Core/DrawableObject.hpp>
 #include <Core/Object.hpp>
 
 namespace Engine {
 	class Scene final {
 	private:
-		CameraObject *camera;
-		DrawableObject *square;
-		DrawableObject *bunny;
+		Object *camera;
+		Object *square;
+		Object *bunny;
 
 	public:
 		Scene();

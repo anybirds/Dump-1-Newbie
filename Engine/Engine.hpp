@@ -8,9 +8,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <Core/CameraObject.hpp>
+#include <Core/Component.hpp>
 #include <Core/Debug.hpp>
-#include <Core/DrawableObject.hpp>
 #include <Core/Object.hpp>
 #include <Core/Resource.hpp>
 #include <Core/Scene.hpp>

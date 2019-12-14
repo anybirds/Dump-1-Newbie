@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Core/Transform.hpp>
-#include <Core/CameraObject.hpp>
 #include <Graphics/Camera.hpp>
 #include <Graphics/Mesh.hpp>
 #include <Graphics/Material.hpp>
@@ -13,10 +12,8 @@ namespace Engine {
 
 	Draw an object that has mesh and material.
 	*/
-	class Renderer final {
+	class Renderer final : public Component {
 	private:
-		const Transform *transform;
-
 		const Mesh *mesh;
 		const Material *material;
 
@@ -33,8 +30,6 @@ namespace Engine {
 		Renderer& Mesh(const Engine::Mesh &mesh) { this->mesh = &mesh; return *this; }
 		const Engine::Material& Material() const { return *material; }
 		Renderer& Material(const Engine::Material &material) { this->material = &material; return *this; }
-		const Engine::Transform& Transform() const { return *transform; }
-		Renderer& Transform(const Engine::Transform &transform) { this->transform = &transform; return *this; }
 
 		void Render();
 	};

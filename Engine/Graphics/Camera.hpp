@@ -2,6 +2,9 @@
 
 #include <glm/glm.hpp>
 
+#include <Core/Component.hpp>
+#include <Core/Object.hpp>
+
 namespace Engine {
 
 	/*
@@ -11,10 +14,17 @@ namespace Engine {
 	Specify camera properties by directly manipulating the normalization matrix.
 	glm::perspective, glm::otrho can be used.
 	 */
-	class Camera final {
+	class Camera final : public Component {
+	private:
+		static const Camera *current;
+
+	public:
+		static const Camera* Current() { return current; }
+		static void Current(const Camera &current) { Camera::current = &current; }
+
 	private:
 		glm::mat4 normalization;
-		
+
 	public:
 		struct Detail {
 			glm::mat4 Normalization;
