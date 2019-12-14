@@ -21,9 +21,10 @@ Example
 #endif
 */
 
-#define DEBUG_APPLICATION 
-#define DEBUG_INTERACTION
+#define DEBUG_APPLICATION
+#define DEBUG_CORE
 #define DEBUG_GRAPHICS
+#define DEBUG_INTERACTION
 #define DEBUG_PHYSICS
 
 using namespace std;

@@ -2,7 +2,7 @@
 
 using namespace Engine;
 
-DrawableObject::DrawableObject(const DrawableObjectDetail &drawable_object) 
+DrawableObject::DrawableObject(const Detail &drawable_object) 
 	: Object(drawable_object.Object), renderer(drawable_object.Renderer) {
 	renderer.Transform(transform);
 }

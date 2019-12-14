@@ -6,10 +6,6 @@
 
 namespace Engine {
 
-	struct TextureDetail {
-		const char *TextureName;
-	};
-
 	/*
 	Texture
 	
@@ -20,7 +16,11 @@ namespace Engine {
 		GLuint name;
 
 	public:
-		explicit Texture(const TextureDetail &texture);
+		struct Detail {
+			const char *TextureName;
+		};
+
+		explicit Texture(const Detail &texture);
 		~Texture();
 		GLuint Name() const { return name; }
 	};

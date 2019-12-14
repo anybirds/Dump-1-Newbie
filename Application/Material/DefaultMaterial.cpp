@@ -1,11 +1,12 @@
 #include <Material/DefaultMaterial.hpp>
 
-DefaultMaterial::DefaultMaterial(const DefaultMaterialDetail &default_material) 
-	: Material(MaterialDetail{default_material.VertexShaderName, default_material.FragmentShaderName}), texture(nullptr) {
+DefaultMaterial::DefaultMaterial(const Detail &default_material) 
+	: Material(Material::Detail{default_material.VertexShaderName, default_material.FragmentShaderName}), 
+	texture(&Resource::FindTexture(default_material.TextureName)) {
 
 }
 
-void DefaultMaterial::Update() {
+void DefaultMaterial::Update() const {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->Name());
 }

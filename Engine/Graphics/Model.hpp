@@ -10,10 +10,6 @@
 
 namespace Engine {
 
-	struct ModelDetail {
-		const char *ModelName;
-	};
-
 	/*
 	Model imported by using assimp library
 	
@@ -29,11 +25,15 @@ namespace Engine {
 		float *vert;
 		unsigned *attrib;
 		unsigned *idx;
-		MeshDetail *mesh;
+		Mesh::Detail *mesh;
 		
 	public:
-		explicit Model(const ModelDetail &model);
+		struct Detail {
+			const char *ModelName;
+		};
+
+		explicit Model(const Detail &model);
 		~Model();
-		MeshDetail& MeshDetail() const { return *mesh; }
+		Mesh::Detail& MeshDetail() const { return *mesh; }
 	};
 }

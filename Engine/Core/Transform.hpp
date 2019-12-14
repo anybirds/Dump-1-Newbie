@@ -5,13 +5,6 @@
 
 namespace Engine {	
 
-	struct TransformDetail {
-		glm::vec3 Position;
-		glm::mat4 Rotation;
-		glm::vec3 Scale;
-		const class Transform *Parent;
-	};
-
 	/*
 	Transform
 
@@ -25,7 +18,14 @@ namespace Engine {
 		const Transform *parent;
 
 	public:
-		explicit Transform(const TransformDetail &transform);
+		struct Detail {
+			glm::vec3 Position;
+			glm::mat4 Rotation;
+			glm::vec3 Scale;
+			const class Transform *Parent;
+		};
+
+		explicit Transform(const Detail &transform);
 		~Transform();
 
 		glm::vec3 Position() const { return position; }

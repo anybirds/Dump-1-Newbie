@@ -7,11 +7,6 @@
 
 namespace Engine {
 
-	struct CameraObjectDetail {
-		ObjectDetail Object;
-		CameraDetail Camera;
-	};
-
 	/*
 	CameraObject
 
@@ -29,9 +24,14 @@ namespace Engine {
 		Camera camera;
 
 	public:
-		CameraObject(const CameraObjectDetail &camera_object);
+		struct Detail {
+			Object::Detail Object;
+			Camera::Detail Camera;
+		};
+
+		explicit CameraObject(const Detail &camera_object);
 		virtual ~CameraObject();
-		
+
 		const Engine::Camera& Camera() const { return camera; }
 	};
 }

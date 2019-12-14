@@ -9,7 +9,7 @@
 
 using namespace Engine;
 
-Texture::Texture(const TextureDetail &texture) {
+Texture::Texture(const Detail &texture) {
 	int width, height, channel;
 	unsigned char *image = SOIL_load_image(texture.TextureName, &width, &height, &channel, SOIL_LOAD_AUTO);
 	if (!image) {

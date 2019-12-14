@@ -41,7 +41,7 @@ void Window::glewInit() {
 	}
 }
 
-Window::Window(const WindowDetail &window) 
+Window::Window(const Detail &window) 
 	: width(window.Width), height(window.Height), name(window.Name) {
 	Window::glfwInit();
 
@@ -62,6 +62,11 @@ Window::Window(const WindowDetail &window)
 
 	Window::glewInit();
 	Viewport(0, 0, width, height);
+
+#ifdef DEBUG
+	cout << '[' << __FUNCTION__ << ']' << " Window created." << endl;
+#endif	
+
 }
 
 Window::~Window() {

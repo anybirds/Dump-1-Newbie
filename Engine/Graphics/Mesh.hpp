@@ -4,15 +4,6 @@
 
 namespace Engine {
 
-	struct MeshDetail {
-		unsigned VertexCount; 
-		const float *Vertices;
-		unsigned AttributeCount; 
-		const unsigned *Attributes;
-		unsigned IndexCount;
-		const unsigned *Indices;
-	};
-
 	/*
 	Mesh
 
@@ -31,8 +22,17 @@ namespace Engine {
 		GLuint ebo;
 		
 	public:
+		struct Detail {
+			unsigned VertexCount;
+			const float *Vertices;
+			unsigned AttributeCount;
+			const unsigned *Attributes;
+			unsigned IndexCount;
+			const unsigned *Indices;
+		};
+
 		/* acquires resources(VAO, VBO, EBO) needed to generate a mesh for a model */
-		explicit Mesh(const MeshDetail &mesh);
+		explicit Mesh(const Detail &mesh);
 		~Mesh();
 
 		friend class Renderer;

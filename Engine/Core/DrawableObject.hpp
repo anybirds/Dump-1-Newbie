@@ -7,11 +7,6 @@
 
 namespace Engine {
 
-	struct DrawableObjectDetail {
-		ObjectDetail Object;
-		RendererDetail Renderer;
-	};
-
 	/*
 	DrawableObject
 
@@ -22,7 +17,12 @@ namespace Engine {
 	private:
 		Renderer renderer;
 	public:
-		DrawableObject(const DrawableObjectDetail &drawable_object);
+		struct Detail {
+			Object::Detail Object;
+			Renderer::Detail Renderer;
+		};
+
+		explicit DrawableObject(const Detail &drawable_object);
 		virtual ~DrawableObject();
 
 		Engine::Renderer& Renderer() { return renderer; }

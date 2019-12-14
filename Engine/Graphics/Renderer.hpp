@@ -8,11 +8,6 @@
 
 namespace Engine {
 
-	struct RendererDetail {
-		const Mesh *Mesh;
-		const Material *Material;
-	};
-
 	/*
 	Renderer
 
@@ -26,7 +21,12 @@ namespace Engine {
 		const Material *material;
 
 	public:
-		explicit Renderer(const RendererDetail &renderer);
+		struct Detail {
+			const char *MeshName;
+			const char *MaterialName;
+		};
+
+		explicit Renderer(const Detail &renderer);
 		~Renderer();
 
 		const Engine::Mesh& Mesh() const { return *mesh; }

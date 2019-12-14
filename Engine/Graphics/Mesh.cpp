@@ -7,17 +7,12 @@
 
 using namespace Engine;
 
-Mesh::Mesh(const MeshDetail &mesh) : vcnt(mesh.VertexCount), icnt(mesh.IndexCount) {
+Mesh::Mesh(const Detail &mesh) : vcnt(mesh.VertexCount), icnt(mesh.IndexCount) {
 	unsigned acnt = mesh.AttributeCount;
 
 	const float *vert = mesh.Vertices;
 	const unsigned *attrib = mesh.Attributes;
 	const unsigned *idx = mesh.Indices;
-
-#ifdef DEBUG
-	cout << '[' << __FUNCTION__ << ']' 
-		<< " vertex: " << vcnt << " attribute: " << acnt << " index: " << icnt << endl;
-#endif
 
 	// generate
 	glGenVertexArrays(1, &vao);
@@ -52,6 +47,13 @@ Mesh::Mesh(const MeshDetail &mesh) : vcnt(mesh.VertexCount), icnt(mesh.IndexCoun
 
 	// restore
 	glBindVertexArray(0);
+
+#ifdef DEBUG
+	cout << '[' << __FUNCTION__ << ']' 
+		<< "{vertex: " << vcnt << " attribute: " << acnt << " index: " << icnt << '}' 
+		<<" Mesh created." << endl;
+#endif
+
 }
 
 Mesh::~Mesh() {

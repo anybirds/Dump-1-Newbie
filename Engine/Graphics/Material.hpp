@@ -48,11 +48,6 @@ namespace Engine {
 		}
 	};
 
-	struct MaterialDetail {
-		const char *VertexShaderName;
-		const char *FragmentShaderName;
-	};
-
 	/*
 	Material
 
@@ -66,9 +61,14 @@ namespace Engine {
 
 		GLuint CompileShader(const char *path, GLenum type);
 	public:
-		explicit Material(const MaterialDetail &material);
+		struct Detail {
+			const char *VertexShaderName;
+			const char *FragmentShaderName;
+		};
+
+		explicit Material(const Detail &material);
 		virtual ~Material();
-		virtual void Update() = 0;
+		virtual void Update() const = 0;
 
 		friend class Renderer;
 	};

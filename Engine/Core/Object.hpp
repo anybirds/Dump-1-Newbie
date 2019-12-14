@@ -4,10 +4,6 @@
 
 namespace Engine {
 
-	struct ObjectDetail {
-		TransformDetail Transform;
-	};
-
 	/*
 	Object
 
@@ -17,8 +13,15 @@ namespace Engine {
 	protected:
 		Transform transform;
 	public:
-		Object(const ObjectDetail &object);
+		struct Detail {
+			Transform::Detail Transform;
+		};
+
+		Object(const Detail &object);
 		virtual ~Object();
+
+		virtual void Start() {}
+		virtual void Update() {}
 
 		const Engine::Transform& Transform() const { return transform; }
 		Object& Transform(const Engine::Transform& transform) { this->transform = transform; return *this; }

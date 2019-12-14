@@ -16,7 +16,7 @@ private:
 	static const unsigned cube_idx[];
 
 public:
-	static MeshDetail Triangle;
-	static MeshDetail Square;
-	static MeshDetail Cube;
+	static Mesh::Detail Triangle;
+	static Mesh::Detail Square;
+	static Mesh::Detail Cube;
 };

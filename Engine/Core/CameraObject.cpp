@@ -5,7 +5,7 @@ using namespace Engine;
 
 const CameraObject *CameraObject::current;
 
-CameraObject::CameraObject(const CameraObjectDetail &camera_object) 
+CameraObject::CameraObject(const Detail &camera_object) 
 	: Object(camera_object.Object), camera(camera_object.Camera) {
 
 }

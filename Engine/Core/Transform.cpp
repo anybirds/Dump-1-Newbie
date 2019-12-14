@@ -10,7 +10,7 @@
 using namespace glm;
 using namespace Engine;
 
-Transform::Transform(const TransformDetail &transform) 
+Transform::Transform(const Detail &transform) 
 	: position(transform.Position), rotation(transform.Rotation), scale(transform.Scale), parent(transform.Parent) {
 
 }

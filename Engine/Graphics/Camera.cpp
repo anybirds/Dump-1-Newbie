@@ -8,7 +8,7 @@
 using namespace glm;
 using namespace Engine;
 
-Camera::Camera(const CameraDetail &camera) : normalization(camera.Normalization) {
+Camera::Camera(const Detail &camera) : normalization(camera.Normalization) {
 	
 }
 

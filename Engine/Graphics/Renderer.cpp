@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 
 #include <Core/Debug.hpp>
+#include <Core/Resource.hpp>
 #include <Graphics/Renderer.hpp>
 
 #ifdef DEBUG_GRAPHICS
@@ -11,8 +12,8 @@
 using namespace glm;
 using namespace Engine;
 
-Renderer::Renderer(const RendererDetail &renderer)
-	: mesh(renderer.Mesh), material(renderer.Material) {
+Renderer::Renderer(const Detail &renderer)
+	: mesh(&Resource::FindMesh(renderer.MeshName)), material(&Resource::FindMaterial(renderer.MaterialName)) {
 
 }
 
@@ -24,6 +25,8 @@ void Renderer::Render() {
 	glBindVertexArray(mesh->vao);
 
 	glUseProgram(material->program);
+	material->Update();
+
 	GLuint location;
 	if (transform) {
 		// object with transform 

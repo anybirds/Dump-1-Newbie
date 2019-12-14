@@ -6,13 +6,7 @@
 #include <GLFW/glfw3.h>
 
 namespace Engine {
-
-	struct WindowDetail {
-		int Width;
-		int Height;
-		string Name;
-	};
-
+	
 	/*
 	Window
 
@@ -36,7 +30,12 @@ namespace Engine {
 		int viewport_height;
 
 	public:
-		explicit Window(const WindowDetail &window);
+		struct Detail {
+			int Width;
+			int Height;
+			string Name;
+		};
+		explicit Window(const Detail &window);
 		~Window();
 
 		int Width() const { return width; };

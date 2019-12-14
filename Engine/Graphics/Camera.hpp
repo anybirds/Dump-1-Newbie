@@ -4,10 +4,6 @@
 
 namespace Engine {
 
-	struct CameraDetail {
-		glm::mat4 Normalization;
-	};
-
 	/*
 	Camera
 
@@ -20,7 +16,10 @@ namespace Engine {
 		glm::mat4 normalization;
 		
 	public:
-		explicit Camera(const CameraDetail &camera);
+		struct Detail {
+			glm::mat4 Normalization;
+		};
+		explicit Camera(const Detail &camera);
 		~Camera();
 		
 		glm::mat4 Normalization() const { return normalization; }

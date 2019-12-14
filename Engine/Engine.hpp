@@ -12,6 +12,8 @@
 #include <Core/Debug.hpp>
 #include <Core/DrawableObject.hpp>
 #include <Core/Object.hpp>
+#include <Core/Resource.hpp>
+#include <Core/Scene.hpp>
 #include <Core/Transform.hpp>
 
 #include <Graphics/Camera.hpp>

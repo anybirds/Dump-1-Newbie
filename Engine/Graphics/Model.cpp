@@ -12,7 +12,7 @@
 using namespace Assimp;
 using namespace Engine;
 
-Model::Model(const ModelDetail &model) : vert(nullptr), attrib(nullptr), idx(nullptr), mesh(nullptr) {
+Model::Model(const Detail &model) : vert(nullptr), attrib(nullptr), idx(nullptr), mesh(nullptr) {
 	Importer importer;
 	scene = importer.ReadFile(model.ModelName, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals);
 
@@ -78,7 +78,7 @@ Model::Model(const ModelDetail &model) : vert(nullptr), attrib(nullptr), idx(nul
 		idx[base + 2] = aimesh->mFaces[i].mIndices[2];
 	}
 
-	mesh = new Engine::MeshDetail{ vcnt, vert, acnt, attrib, icnt, idx };
+	mesh = new Engine::Mesh::Detail{ vcnt, vert, acnt, attrib, icnt, idx };
 }
 
 Model::~Model() {
