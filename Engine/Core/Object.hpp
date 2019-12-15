@@ -4,13 +4,13 @@
 #include <string>
 #include <typeinfo>
 
-#include <Core/Component.hpp>
 #include <Core/Transform.hpp>
 
 namespace Engine {
 	
+	class Component;
 	class Scene;
-
+	
 	/*
 	Object
 

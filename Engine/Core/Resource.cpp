@@ -1,8 +1,13 @@
 #include <typeinfo>
 
-#include <../Application/Mesh/Geometry.hpp>
 #include <../Application/Material/DefaultMaterial.hpp>
+#include <Core/Debug.hpp>
 #include <Core/Resource.hpp>
+#include <Graphics/Geometry.hpp>
+#include <Graphics/Material.hpp>
+#include <Graphics/Mesh.hpp>
+#include <Graphics/Model.hpp>
+#include <Graphics/Texture.hpp>
 
 #ifdef DEBUG_CORE
 #define DEBUG

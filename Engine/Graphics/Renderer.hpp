@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Core/Transform.hpp>
-#include <Graphics/Camera.hpp>
-#include <Graphics/Mesh.hpp>
-#include <Graphics/Material.hpp>
+#include <Core/Component.hpp>
 
 namespace Engine {
+
+	class Material;
+	class Mesh;
 
 	/*
 	Renderer Component

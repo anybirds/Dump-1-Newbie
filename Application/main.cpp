@@ -1,8 +1,5 @@
 #include <Engine.hpp>
 
-#include <Material/DefaultMaterial.hpp>
-#include <Mesh/Geometry.hpp>
-
 #ifdef DEBUG_APPLICATION
 #define DEBUG
 #endif

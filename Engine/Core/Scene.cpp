@@ -1,7 +1,13 @@
-#include <../Application/Mesh/Geometry.hpp>
-#include <../Application/Material/DefaultMaterial.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <../Application/Script/RotateScript.hpp>
-#include <Engine.hpp>
+#include <Graphics/Camera.hpp>
+#include <Core/Debug.hpp>
+#include <Core/Object.hpp>
+#include <Graphics/Renderer.hpp>
+#include <Core/Scene.hpp>
+#include <Core/Script.hpp>
 
 #ifdef DEBUG_CORE
 #define DEBUG
@@ -21,7 +27,7 @@ Scene::Scene() {
 	
 	bunny = new Object({ this, "Bunny", { vec3(2.0f, 0.0f, 0.0f), rotate(mat4(1.0f), radians(90.0f), vec3(0.0f, 1.0f, 0.0f)), vec3(2.0f) } });
 	bunny->AddComponent<Renderer>({ { bunny }, "Bunny", "Bunny" });
-	bunny->AddComponent<RotateScript>({ { bunny } });
+	bunny->AddComponent<RotateScript>({ { bunny }, 90.0f });
 
 #ifdef DEBUG
 	cout << '[' << __FUNCTION__ << ']' << " Scene created." << endl;

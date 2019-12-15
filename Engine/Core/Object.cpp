@@ -1,3 +1,4 @@
+#include <Core/Component.hpp>
 #include <Core/Object.hpp>
 
 using namespace Engine;

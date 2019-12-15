@@ -2,8 +2,12 @@
 #include <glm/glm.hpp>
 
 #include <Core/Debug.hpp>
+#include <Core/Object.hpp>
 #include <Core/Resource.hpp>
 #include <Core/Scene.hpp>
+#include <Graphics/Camera.hpp>
+#include <Graphics/Material.hpp>
+#include <Graphics/Mesh.hpp>
 #include <Graphics/Renderer.hpp>
 
 #ifdef DEBUG_GRAPHICS

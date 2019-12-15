@@ -2,13 +2,14 @@
 
 namespace Engine {
 	
-	class Component;
+	class Scene;
 
 	class Script {
 	private:
-		const Component *component;
+		Scene &scene;
+
 	public:
-		Script(const Component &component);
+		Script(Scene &scene);
 		virtual ~Script();
 		virtual void Start() = 0;
 		virtual void Update() = 0;

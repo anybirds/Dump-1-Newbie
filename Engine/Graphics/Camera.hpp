@@ -3,7 +3,6 @@
 #include <glm/glm.hpp>
 
 #include <Core/Component.hpp>
-#include <Core/Object.hpp>
 
 namespace Engine {
 

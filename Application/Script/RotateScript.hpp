@@ -4,9 +4,13 @@
 #include <Core/Script.hpp>
 
 class RotateScript : public Engine::Component, public Engine::Script {
+private:
+	float rate;
+
 public:
 	struct Detail {
 		Component::Detail Component;
+		float Rate;
 	};
 	
 	RotateScript(const Detail &rotate_script);
