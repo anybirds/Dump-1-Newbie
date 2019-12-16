@@ -1,6 +1,7 @@
 #pragma once
 
 #include <set>
+#include <unordered_map>
 
 namespace Engine {
 
@@ -15,10 +16,7 @@ namespace Engine {
 	*/
 	class Scene final {
 	private:
-		Object *camera;
-		Object *square;
-		Object *bunny;
-
+		std::unordered_map<std::string, Object*> object;
 		std::set<Renderer*> renderer;
 		std::set<Script*> script;
 

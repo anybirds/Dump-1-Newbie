@@ -30,19 +30,21 @@ Mesh::Mesh(const Detail &mesh) : vcnt(mesh.VertexCount), icnt(mesh.IndexCount) {
 	stride *= sizeof(float);
 	glBufferData(GL_ARRAY_BUFFER, vcnt * stride, vert, GL_STATIC_DRAW);
 
+	// attribute
+	float *offset = nullptr;
+	for (unsigned i = 0; i < acnt; i++) {
+		if (attrib[i]) {
+			glEnableVertexAttribArray(i);
+			glVertexAttribPointer(i, attrib[i], GL_FLOAT, GL_FALSE, stride, (void *)offset);
+			offset += attrib[i];
+		}
+	}
+
 	if (icnt > 0) {
 		// indexed wireframe
 		glGenBuffers(1, &ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, icnt * sizeof(unsigned), idx, GL_STATIC_DRAW);
-	}
-
-	// attribute
-	float *offset = nullptr;
-	for (unsigned i = 0; i < acnt; i++) {
-		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, attrib[i], GL_FLOAT, GL_FALSE, stride, (void *)offset);
-		offset += attrib[i];
 	}
 
 	// restore

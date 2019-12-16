@@ -25,8 +25,8 @@ namespace Engine {
 		struct Detail {
 			unsigned VertexCount;
 			const float *Vertices;
-			unsigned AttributeCount;
-			const unsigned *Attributes;
+			unsigned AttributeCount; // max index of attributes a vertex can have according to the shader
+			const unsigned *Attributes; // value 0 means that the attribute is empty
 			unsigned IndexCount;
 			const unsigned *Indices;
 		};

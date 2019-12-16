@@ -25,7 +25,7 @@ namespace Engine {
 			const class Transform *Parent;
 		};
 
-		explicit Transform(const Detail &transform);
+		Transform(const Detail &transform);
 		~Transform();
 
 		glm::vec3 Position() const { return position; }

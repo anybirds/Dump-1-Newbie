@@ -5,7 +5,7 @@
 
 class DefaultMaterial final : public Engine::Material {
 private:
-	const Engine::Texture *texture;
+	Engine::Texture *texture;
 
 public:
 	struct Detail {
@@ -13,8 +13,9 @@ public:
 		const char *FragmentShaderName;
 		const char *TextureName;
 	};
-	DefaultMaterial(const Detail &default_material);
+	explicit DefaultMaterial(const Detail &default_material);
 	~DefaultMaterial();
 	virtual void Uniform() const;
-	DefaultMaterial& Texture(const Engine::Texture &texture) { this->texture = &texture; return *this; }
+	const Engine::Texture& Texture() { return *texture; }
+	DefaultMaterial& Texture(Engine::Texture &texture) { this->texture = &texture; return *this; }
 };

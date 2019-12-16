@@ -42,7 +42,7 @@ namespace Engine {
 		Window& Width(int width) { this->width = width; return *this; };
 		int Height() const { return height; };
 		Window& Height(int height) { this->height = height; return *this; };
-		const std::string &Name() const { return name; };
+		const std::string& Name() const { return name; };
 		Window& Name(const std::string &name) { this->name = name; return *this; };
 
 		void SetActive();

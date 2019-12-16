@@ -13,7 +13,7 @@ namespace Engine {
 			Object *Object;
 		};
 
-		Component(const Detail &component);
+		explicit Component(const Detail &component);
 		virtual ~Component();
 
 		Engine::Object& Object() const { return *object; }

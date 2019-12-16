@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -17,15 +15,18 @@ namespace Engine {
 	Imported mesh basically has 3 attributes, position, normal and uv.
 	A model can import only one mesh.
 	*/
+
 	class Model final {
 	private:
+		Assimp::Importer importer;
 		const aiScene *scene;
-
+		unsigned mcnt;
+		
 		// mesh
-		float *vert;
-		unsigned *attrib;
-		unsigned *idx;
-		Mesh::Detail *mesh;
+		float **vert;
+		unsigned **attrib;
+		unsigned **idx;
+		Mesh::Detail **mesh;
 		
 	public:
 		struct Detail {
@@ -34,6 +35,7 @@ namespace Engine {
 
 		explicit Model(const Detail &model);
 		~Model();
-		Mesh::Detail& MeshDetail() const { return *mesh; }
+		Mesh::Detail& MeshDetail(unsigned midx) const { return *mesh[midx]; }
+		unsigned MeshCount() const { return mcnt; }
 	};
 }

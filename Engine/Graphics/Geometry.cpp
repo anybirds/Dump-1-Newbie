@@ -3,24 +3,24 @@
 using namespace Engine;
 
 const float Geometry::tri_vert[] = {
-	0.0f, 1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		0.5f, 0.0f,
-	-1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		0.0f, 1.0f,
-	1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 1.0f
+	0.0f, 1.0f, 0.0f,		0.5f, 0.0f,
+	-1.0f, -1.0f, 0.0f,		0.0f, 1.0f,
+	1.0f, -1.0f, 0.0f,		1.0f, 1.0f
 };
 
 const unsigned Geometry::tri_attrib[] = {
-	3, 3, 2
+	3, 0, 2
 };
 
 const float Geometry::square_vert[] = {
-	-1.0f, 1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		0.0f, 0.0f,
-	-1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		0.0f, 1.0f,
-	1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 1.0f,
-	1.0f, 1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 0.0f
+	-1.0f, 1.0f, 0.0f,		0.0f, 0.0f,
+	-1.0f, -1.0f, 0.0f,		0.0f, 1.0f,
+	1.0f, -1.0f, 0.0f,		1.0f, 1.0f,
+	1.0f, 1.0f, 0.0f,		1.0f, 0.0f
 };
 
 const unsigned Geometry::square_attrib[] = {
-	3, 3, 2
+	3, 0, 2
 };
 
 const unsigned Geometry::square_idx[] = {

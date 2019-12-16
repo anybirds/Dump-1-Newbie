@@ -22,14 +22,16 @@ void Resource::Init() {
 	resource.model.insert({ "Bunny", new Model({"Resource\\Model\\bunny_model.obj"}) });
 
 	resource.mesh.insert({ "Square", new Mesh(Geometry::Square) });
-	resource.mesh.insert({ "Bunny", new Mesh(FindModel("Bunny").MeshDetail()) });
+	// need to get mesh name from model to serialize
+	// loop to get all meshes the model has
+	resource.mesh.insert({ "Bunny", new Mesh(FindModel("Bunny").MeshDetail(0)) }); 
 
 	resource.texture.insert({ "Bunny", new Texture({"Resource\\Texture\\bunny_texture.png"}) });
 
 	resource.material.insert({ "Bunny",
 		new DefaultMaterial({
-			"Resource\\Shader\\test_graphics_vert.glsl" ,
-			"Resource\\Shader\\test_graphics_frag.glsl" ,
+			"Resource\\Shader\\unlit_vert.glsl" ,
+			"Resource\\Shader\\unlit_frag.glsl" ,
 			"Bunny"
 			})
 		});

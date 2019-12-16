@@ -5,7 +5,8 @@ using namespace glm;
 using namespace Engine;
 
 RotateScript::RotateScript(const Detail &rotate_script) 
-	: Component(rotate_script.Component), Script(Object().Scene()), rate(rotate_script.Rate) {
+	: Component(rotate_script.Component), Script(Object().Scene()), 
+	rate(rotate_script.Rate) {
 
 }
 

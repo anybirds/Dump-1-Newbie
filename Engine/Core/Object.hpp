@@ -31,7 +31,7 @@ namespace Engine {
 			Transform::Detail Transform;
 		};
 
-		Object(const Detail &object);
+		explicit Object(const Detail &object);
 		~Object();
 		
 		template <typename ComponentType> 
@@ -40,10 +40,12 @@ namespace Engine {
 		template <typename ComponentType>
 		Object& AddComponent(const typename ComponentType::Detail &component); 
 
+		Engine::Scene& Scene() const { return *scene; }
+		const std::string& Name() const { return name; }
+		Object& Name(const std::string& name) { this->name = name; return *this; }
 		Engine::Transform& Transform() { return transform; }
 		const Engine::Transform& Transform() const { return transform; }
-		Object& Transform(const Engine::Transform& transform) { this->transform = transform; return *this; }
-		Engine::Scene& Scene() const { return *scene; }
+		Object& Transform(const Engine::Transform &transform) { this->transform = transform; return *this; }
 	};
 
 	template <typename ComponentType>

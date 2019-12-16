@@ -13,7 +13,7 @@ public:
 		float Rate;
 	};
 	
-	RotateScript(const Detail &rotate_script);
+	explicit RotateScript(const Detail &rotate_script);
 	virtual ~RotateScript();
 	virtual void Start();
 	virtual void Update();
