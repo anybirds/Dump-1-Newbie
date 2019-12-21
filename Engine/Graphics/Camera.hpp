@@ -18,22 +18,21 @@ namespace Engine {
 		static const Camera *current;
 
 	public:
-		static const Camera* Current() { return current; }
-		static void Current(const Camera &current) { Camera::current = &current; }
+		static const Camera* GetCurrentCamera() { return current; }
+		static void SetCurrentCamera(const Camera &current) { Camera::current = &current; }
 
 	private:
 		glm::mat4 normalization;
 
 	public:
-		struct Detail {
-			Component::Detail Component;
-			glm::mat4 Normalization;
+		struct Data : Component::Data {
+			glm::mat4 normalization;
 		};
 
-		explicit Camera(const Detail &camera);
+		explicit Camera(const Data &data);
 		~Camera();
 		
-		glm::mat4 Normalization() const { return normalization; }
-		Camera& Normalization(const glm::mat4 &normalization) { this->normalization = normalization; return *this; }
+		glm::mat4 GetNormalization() const { return normalization; }
+		Camera& SetNormalization(const glm::mat4 &normalization) { this->normalization = normalization; return *this; }
 	};
 }

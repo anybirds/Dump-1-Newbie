@@ -10,8 +10,7 @@ using namespace Engine;
 
 int main(int argc, char **argv) {
 	// replace this code block to Engine::Init();
-	Window window({ 800, 600, __FUNCTION__ }); // replace this code to Window::Init({});
-	Time::Init();
+	Window window({ __FUNCTION__, 800, 600 }); // replace this code to Window::Init({});
 	Resource::Init(); // replace this to Resource::Init({""});
 
 	Scene scene; // replace this to Scene scene({""});

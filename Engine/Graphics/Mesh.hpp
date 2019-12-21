@@ -22,17 +22,17 @@ namespace Engine {
 		GLuint ebo;
 		
 	public:
-		struct Detail {
-			unsigned VertexCount;
-			const float *Vertices;
-			unsigned AttributeCount; // max index of attributes a vertex can have according to the shader
-			const unsigned *Attributes; // value 0 means that the attribute is empty
-			unsigned IndexCount;
-			const unsigned *Indices;
+		struct Data {
+			const float *vert;
+			const unsigned *attrib; // value 0 means that the attribute is empty
+			const unsigned *idx;
+			unsigned vcnt;
+			unsigned acnt; // max index of attributes a vertex can have according to the shader
+			unsigned icnt;
 		};
 
 		/* acquires resources(VAO, VBO, EBO) needed to generate a mesh for a model */
-		explicit Mesh(const Detail &mesh);
+		explicit Mesh(const Data &data);
 		~Mesh();
 
 		friend class Renderer;

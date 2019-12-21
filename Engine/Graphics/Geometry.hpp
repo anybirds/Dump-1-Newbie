@@ -17,8 +17,8 @@ namespace Engine {
 		static const unsigned cube_idx[];
 
 	public:
-		static Engine::Mesh::Detail Triangle;
-		static Engine::Mesh::Detail Square;
-		static Engine::Mesh::Detail Cube;
+		static Engine::Mesh::Data Triangle;
+		static Engine::Mesh::Data Square;
+		static Engine::Mesh::Data Cube;
 	};
 }

@@ -8,12 +8,11 @@ private:
 	float rate;
 
 public:
-	struct Detail {
-		Component::Detail Component;
-		float Rate;
+	struct Data : Component::Data {
+		float rate;
 	};
 	
-	explicit RotateScript(const Detail &rotate_script);
+	explicit RotateScript(const Data &data);
 	virtual ~RotateScript();
 	virtual void Start();
 	virtual void Update();

@@ -6,7 +6,6 @@ namespace Engine {
 		static Time time;
 
 	public:
-		static void Init();
 		static void Update();
 		static float DeltaTime() { return static_cast<float>(time.dt); }
 

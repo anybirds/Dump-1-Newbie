@@ -26,16 +26,16 @@ namespace Engine {
 		float **vert;
 		unsigned **attrib;
 		unsigned **idx;
-		Mesh::Detail **mesh;
+		Mesh::Data **mesh;
 		
 	public:
-		struct Detail {
-			const char *ModelName;
+		struct Data {
+			const char *model_path;
 		};
 
-		explicit Model(const Detail &model);
+		explicit Model(const Data &data);
 		~Model();
-		Mesh::Detail& MeshDetail(unsigned midx) const { return *mesh[midx]; }
+		Mesh::Data& MeshData(unsigned midx) const { return *mesh[midx]; }
 		unsigned MeshCount() const { return mcnt; }
 	};
 }

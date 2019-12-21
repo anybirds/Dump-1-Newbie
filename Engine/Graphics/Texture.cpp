@@ -9,17 +9,17 @@
 
 using namespace Engine;
 
-Texture::Texture(const Detail &texture) {
+Texture::Texture(const Data &data) {
 	int width, height, channel;
-	unsigned char *image = SOIL_load_image(texture.TextureName, &width, &height, &channel, SOIL_LOAD_AUTO);
+	unsigned char *image = SOIL_load_image(data.texture_path, &width, &height, &channel, SOIL_LOAD_AUTO);
 	if (!image) {
 #ifdef DEBUG
-		cout << '[' << __FUNCTION__ << ']' << " cannot load image file: " << texture.TextureName << '\n';
+		cout << '[' << __FUNCTION__ << ']' << " cannot load image file: " << data.texture_path << '\n';
 #endif
 	}
 
-	glGenTextures(1, &name);
-	glBindTexture(GL_TEXTURE_2D, name);
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

@@ -53,7 +53,7 @@ GLuint Material::CompileShader(const char *path, GLenum type) {
 	return shader;
 }
 
-Material::Material(const Detail &material) {
+Material::Material(const Data &data) {
 	// Delete the program that is alreay linked
 	// todo: this is terribly inefficient when there alreay is a compiled version of vertex and fragment shaders. 
 	glDeleteProgram(program);
@@ -63,8 +63,8 @@ Material::Material(const Detail &material) {
 
 	// Compile shaders
 	try {
-		vert_shader = CompileShader(material.VertexShaderName, GL_VERTEX_SHADER);
-		frag_shader = CompileShader(material.FragmentShaderName, GL_FRAGMENT_SHADER);
+		vert_shader = CompileShader(data.vert_path, GL_VERTEX_SHADER);
+		frag_shader = CompileShader(data.frag_path, GL_FRAGMENT_SHADER);
 	}
 	catch (exception& e) {
 #ifdef DEBUG
@@ -83,7 +83,7 @@ Material::Material(const Detail &material) {
 
 #ifdef DEBUG
 	cout << '[' << __FUNCTION__ << ']'
-		<< "{vertex shader: " << material.VertexShaderName << " fragment shader: " << material.FragmentShaderName << '}'
+		<< "{vertex shader: " << data.vert_path << " fragment shader: " << data.frag_path << '}'
 		<< " Material created." << endl;
 #endif
 }

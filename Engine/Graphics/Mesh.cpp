@@ -7,12 +7,12 @@
 
 using namespace Engine;
 
-Mesh::Mesh(const Detail &mesh) : vcnt(mesh.VertexCount), icnt(mesh.IndexCount) {
-	unsigned acnt = mesh.AttributeCount;
+Mesh::Mesh(const Data &data) : vcnt(data.vcnt), icnt(data.icnt) {
+	unsigned acnt = data.acnt;
 
-	const float *vert = mesh.Vertices;
-	const unsigned *attrib = mesh.Attributes;
-	const unsigned *idx = mesh.Indices;
+	const float *vert = data.vert;
+	const unsigned *attrib = data.attrib;
+	const unsigned *idx = data.idx;
 
 	// generate
 	glGenVertexArrays(1, &vao);

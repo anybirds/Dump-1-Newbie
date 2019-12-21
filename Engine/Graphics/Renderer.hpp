@@ -18,19 +18,18 @@ namespace Engine {
 		Material *material;
 
 	public:
-		struct Detail {
-			Component::Detail Component;
-			const char *MeshName;
-			const char *MaterialName;
+		struct Data : Component::Data {
+			const char *mesh_name; // should change this to pointer
+			const char *material_name;
 		};
 
-		explicit Renderer(const Detail &renderer);
+		explicit Renderer(const Data &data);
 		~Renderer();
 
-		const Engine::Mesh& Mesh() const { return *mesh; }
-		Renderer& Mesh(Engine::Mesh &mesh) { this->mesh = &mesh; return *this; }
-		const Engine::Material& Material() const { return *material; }
-		Renderer& Material(Engine::Material &material) { this->material = &material; return *this; }
+		const Engine::Mesh& GetMesh() const { return *mesh; }
+		Renderer& SetMesh(Engine::Mesh &mesh) { this->mesh = &mesh; return *this; }
+		const Engine::Material& GetMaterial() const { return *material; }
+		Renderer& SetMaterial(Engine::Material &material) { this->material = &material; return *this; }
 
 		void Render();
 	};

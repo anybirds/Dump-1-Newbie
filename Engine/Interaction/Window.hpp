@@ -30,20 +30,20 @@ namespace Engine {
 		int viewport_height;
 
 	public:
-		struct Detail {
-			int Width;
-			int Height;
-			string Name;
+		struct Data {
+			const char *name;
+			int width;
+			int height;
 		};
-		explicit Window(const Detail &window);
+		explicit Window(const Data &data);
 		~Window();
 
-		int Width() const { return width; };
-		Window& Width(int width) { this->width = width; return *this; };
-		int Height() const { return height; };
-		Window& Height(int height) { this->height = height; return *this; };
-		const std::string& Name() const { return name; };
-		Window& Name(const std::string &name) { this->name = name; return *this; };
+		int GetWidth() const { return width; };
+		Window& SetWidth(int width) { this->width = width; return *this; };
+		int GetHeight() const { return height; };
+		Window& SetHeight(int height) { this->height = height; return *this; };
+		const std::string& GetName() const { return name; };
+		Window& SetName(const std::string &name) { this->name = name; return *this; };
 
 		void SetActive();
 		void Viewport(int viewport_x, int viewport_y, int viewport_width, int viewport_height);

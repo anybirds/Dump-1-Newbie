@@ -13,15 +13,15 @@ namespace Engine {
 	*/
 	class Texture final {
 	private:
-		GLuint name;
+		GLuint id;
 
 	public:
-		struct Detail {
-			const char *TextureName;
+		struct Data {
+			const char *texture_path;
 		};
 
-		explicit Texture(const Detail &texture);
+		explicit Texture(const Data &data);
 		~Texture();
-		GLuint Name() const { return name; }
+		GLuint GetId() const { return id; }
 	};
 }

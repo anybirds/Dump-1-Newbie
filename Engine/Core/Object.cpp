@@ -3,7 +3,7 @@
 
 using namespace Engine;
 
-Object::Object(const Detail &object) : scene(object.Scene), name(object.Name), transform(object.Transform) {
+Object::Object(const Data &object) : scene(object.scene), name(object.name), transform(object.transform_data) {
 	
 }
 

@@ -11,12 +11,12 @@ using namespace std;
 using namespace Assimp;
 using namespace Engine;
 
-Model::Model(const Detail &model) 
-	: importer(), scene(importer.ReadFile(model.ModelName, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals)) {
+Model::Model(const Data &data) 
+	: importer(), scene(importer.ReadFile(data.model_path, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals)) {
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 #ifdef DEBUG
-		cout << '[' << __FUNCTION__ << ']' << " cannot open file: " << model.ModelName << '\n';
+		cout << '[' << __FUNCTION__ << ']' << " cannot open file: " << data.model_path << '\n';
 #endif
 		return;
 	}
@@ -25,7 +25,7 @@ Model::Model(const Detail &model)
 	vert = new float*[mcnt];
 	attrib = new unsigned*[mcnt];
 	idx = new unsigned*[mcnt];
-	mesh = new Mesh::Detail*[mcnt];
+	mesh = new Mesh::Data*[mcnt];
 
 	for (unsigned midx = 0; midx < mcnt; midx++) {
 		aiMesh *aimesh = scene->mMeshes[midx];
@@ -80,7 +80,7 @@ Model::Model(const Detail &model)
 			base += 3;
 		}
 
-		mesh[midx] = new Engine::Mesh::Detail{ vcnt, vert[midx], acnt, attrib[midx], icnt, idx[midx] };
+		mesh[midx] = new Engine::Mesh::Data{ vert[midx], attrib[midx], idx[midx], vcnt, acnt, icnt };
 	}
 }
 

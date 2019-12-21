@@ -8,14 +8,13 @@ private:
 	Engine::Texture *texture;
 
 public:
-	struct Detail {
-		const char *VertexShaderName;
-		const char *FragmentShaderName;
-		const char *TextureName;
+	struct Data : Material::Data {
+		const char *texture_name;
 	};
-	explicit DefaultMaterial(const Detail &default_material);
+
+	explicit DefaultMaterial(const Data &data);
 	~DefaultMaterial();
 	virtual void Uniform() const;
-	const Engine::Texture& Texture() { return *texture; }
-	DefaultMaterial& Texture(Engine::Texture &texture) { this->texture = &texture; return *this; }
+	const Engine::Texture& GetTexture() { return *texture; }
+	DefaultMaterial& SetTexture(Engine::Texture &texture) { this->texture = &texture; return *this; }
 };

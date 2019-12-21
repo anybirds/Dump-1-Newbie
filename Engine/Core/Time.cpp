@@ -7,10 +7,6 @@ using namespace Engine;
 
 Time Time::time;
 
-void Time::Init() {
-
-}
-
 void Time::Update() {
 	double curr = glfwGetTime();
 	time.dt = curr - time.prev;

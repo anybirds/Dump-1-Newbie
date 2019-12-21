@@ -9,13 +9,13 @@ namespace Engine {
 		Object *object;
 
 	public:
-		struct Detail {
-			Object *Object;
+		struct Data {
+			Object *object;
 		};
 
-		explicit Component(const Detail &component);
+		explicit Component(const Data &data);
 		virtual ~Component();
 
-		Engine::Object& Object() const { return *object; }
+		Engine::Object& GetObject() const { return *object; }
 	};
 }

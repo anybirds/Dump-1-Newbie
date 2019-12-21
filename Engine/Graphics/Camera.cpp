@@ -10,7 +10,7 @@ using namespace Engine;
 
 const Camera *Camera::current;
 
-Camera::Camera(const Detail &camera) : Component(camera.Component), normalization(camera.Normalization) {
+Camera::Camera(const Data &data) : Component(data), normalization(data.normalization) {
 	
 }
 

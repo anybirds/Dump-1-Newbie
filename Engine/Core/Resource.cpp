@@ -24,7 +24,7 @@ void Resource::Init() {
 	resource.mesh.insert({ "Square", new Mesh(Geometry::Square) });
 	// need to get mesh name from model to serialize
 	// loop to get all meshes the model has
-	resource.mesh.insert({ "Bunny", new Mesh(FindModel("Bunny").MeshDetail(0)) }); 
+	resource.mesh.insert({ "Bunny", new Mesh(FindModel("Bunny").MeshData(0)) }); 
 
 	resource.texture.insert({ "Bunny", new Texture({"Resource\\Texture\\bunny_texture.png"}) });
 

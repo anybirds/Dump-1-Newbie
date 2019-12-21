@@ -25,43 +25,43 @@ namespace Engine {
 		std::map<size_t, Component*> component; // <hash_code, Component>
 		
 	public:
-		struct Detail {
-			Engine::Scene *Scene;
-			const char *Name;
-			Transform::Detail Transform;
+		struct Data {
+			Engine::Scene *scene;
+			const char *name;
+			Transform::Data transform_data;
 		};
 
-		explicit Object(const Detail &object);
+		explicit Object(const Data &data);
 		~Object();
 		
 		template <typename ComponentType> 
-		ComponentType& GetComponent(); 
+		ComponentType* GetComponent(); 
 
 		template <typename ComponentType>
-		Object& AddComponent(const typename ComponentType::Detail &component); 
+		Object& AddComponent(const typename ComponentType::Data &data); 
 
-		Engine::Scene& Scene() const { return *scene; }
-		const std::string& Name() const { return name; }
-		Object& Name(const std::string& name) { this->name = name; return *this; }
-		Engine::Transform& Transform() { return transform; }
-		const Engine::Transform& Transform() const { return transform; }
-		Object& Transform(const Engine::Transform &transform) { this->transform = transform; return *this; }
+		Engine::Scene& GetScene() const { return *scene; }
+		const std::string& GetName() const { return name; }
+		Object& SetName(const std::string& name) { this->name = name; return *this; }
+		Engine::Transform& GetTransform() { return transform; }
+		const Engine::Transform& GetTransform() const { return transform; }
+		Object& SetTransform(const Engine::Transform &transform) { this->transform = transform; return *this; }
 	};
 
 	template <typename ComponentType>
-	ComponentType& Object::GetComponent() {
+	ComponentType* Object::GetComponent() {
 		size_t key = typeid(ComponentType).hash_code();
 		auto it = component.find(key);
 		if (it == component.end()) {
 			// exception
 		}
-		return dynamic_cast<ComponentType&>(*it->second);
+		return dynamic_cast<ComponentType*>(it->second);
 	}
 
 	template <typename ComponentType>
-	Object& Object::AddComponent(const typename ComponentType::Detail &component) {
+	Object& Object::AddComponent(const typename ComponentType::Data &data) {
 		size_t key = typeid(ComponentType).hash_code();
-		ComponentType *value = new ComponentType(component);
+		ComponentType *value = new ComponentType(data);
 		this->component.insert({ key, value });
 		return *this;
 	}

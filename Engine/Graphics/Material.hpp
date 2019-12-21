@@ -61,12 +61,12 @@ namespace Engine {
 
 		GLuint CompileShader(const char *path, GLenum type);
 	public:
-		struct Detail {
-			const char *VertexShaderName;
-			const char *FragmentShaderName;
+		struct Data {
+			const char *vert_path;
+			const char *frag_path;
 		};
 
-		explicit Material(const Detail &material);
+		explicit Material(const Data &data);
 		virtual ~Material();
 		virtual void Uniform() const = 0;
 

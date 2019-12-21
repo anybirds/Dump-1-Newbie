@@ -18,26 +18,26 @@ namespace Engine {
 		const Transform *parent;
 
 	public:
-		struct Detail {
-			glm::vec3 Position;
-			glm::mat4 Rotation;
-			glm::vec3 Scale;
-			const class Transform *Parent;
+		struct Data {
+			glm::vec3 position;
+			glm::mat4 rotation;
+			glm::vec3 scale;
+			const class Transform *parent;
 		};
 
-		Transform(const Detail &transform);
+		Transform(const Data &data);
 		~Transform();
 
-		glm::vec3 Position() const { return position; }
-		Transform& Position(const glm::vec3 &position) { this->position = position; return *this; }
-		glm::mat4 Rotation() const { return rotation; }
-		Transform& Rotation(const glm::mat4 &rotation) { this->rotation = rotation; return *this; }
-		glm::vec3 Scale() const { return scale; }
-		Transform& Scale(const glm::vec3 &scale) { this->scale = scale; return *this; }
+		glm::vec3 GetPosition() const { return position; }
+		Transform& SetPosition(const glm::vec3 &position) { this->position = position; return *this; }
+		glm::mat4 GetRotation() const { return rotation; }
+		Transform& SetRotation(const glm::mat4 &rotation) { this->rotation = rotation; return *this; }
+		glm::vec3 GetScale() const { return scale; }
+		Transform& SetScale(const glm::vec3 &scale) { this->scale = scale; return *this; }
 
 		/*
 		Computes transform's 4*4 matrix representation. 
 		 */
-		glm::mat4 Matrix() const;
+		glm::mat4 GetMatrix() const;
 	};
 }

@@ -42,8 +42,8 @@ void Window::glewInit() {
 	glEnable(GL_DEPTH_TEST); // move this to framebuffer specification
 }
 
-Window::Window(const Detail &window) 
-	: width(window.Width), height(window.Height), name(window.Name) {
+Window::Window(const Data &data) 
+	: width(data.width), height(data.height), name(data.name) {
 	Window::glfwInit();
 
 	if (!width && !height) {
