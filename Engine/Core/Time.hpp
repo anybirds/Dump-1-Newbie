@@ -1,6 +1,11 @@
 #pragma once
 
 namespace Engine {
+	/*
+	Time
+
+	Manages time by utilizing glfw functions.
+	*/
 	class Time final {
 	private:
 		static Time time;

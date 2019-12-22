@@ -4,6 +4,11 @@ namespace Engine {
 
 	class Object;
 
+	/*
+	Component
+	
+	Base class for components that comprise an Object.
+	*/
 	class Component {
 	private:
 		Object *object;

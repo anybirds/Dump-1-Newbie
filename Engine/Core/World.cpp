@@ -16,11 +16,6 @@ void World::AddObject(Object &object) {
 	world.object.insert({ object.GetName(), &object });
 }
 
-void World::RemoveObject(const string &name) {
-	auto it = world.object.find(name);
-	delete it->second;
-}
-
 void World::RemoveObject(Object &object) {
 	world.object.erase(object.GetName());
 }

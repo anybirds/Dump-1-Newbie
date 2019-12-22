@@ -10,6 +10,12 @@ namespace Engine {
 	class Renderer;
 	class Script;
 
+	/*
+	World
+
+	Has every objects instantiated
+	Trigger events for components like Script and Renderer.
+	*/
 	class World final {
 	private:
 		static World world;
@@ -19,7 +25,6 @@ namespace Engine {
 
 	public:
 		static void AddObject(const Object::Data &object);
-		static void RemoveObject(const std::string &name);
 		static Object* FindObject(const std::string &name);
 
 		template <typename EventListenerType>

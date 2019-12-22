@@ -7,9 +7,9 @@
 #include <Core/Transform.hpp>
 
 namespace Engine {
-	
+
 	class Component;
-	
+
 	/*
 	Object
 
@@ -21,7 +21,7 @@ namespace Engine {
 		std::string name;
 		Transform transform;
 		std::map<size_t, Component*> component; // <hash_code, Component>
-		
+
 	public:
 		struct Data {
 			const char *name;
@@ -30,12 +30,13 @@ namespace Engine {
 
 		explicit Object(const Data &data);
 		~Object();
-		
-		template <typename ComponentType> 
-		ComponentType* GetComponent(); 
 
 		template <typename ComponentType>
-		Object& AddComponent(const typename ComponentType::Data &data); 
+		ComponentType* GetComponent();
+		template <typename ComponentType>
+		Object& AddComponent(const typename ComponentType::Data &data);
+		template <typename ComponentType>
+		Object& RemoveComponent();
 
 		const std::string& GetName() const { return name; }
 		Object& SetName(const std::string& name) { this->name = name; return *this; }
@@ -59,6 +60,14 @@ namespace Engine {
 		size_t key = typeid(ComponentType).hash_code();
 		ComponentType *value = new ComponentType(data);
 		this->component.insert({ key, value });
+		return *this;
+	}
+
+	template <typename ComponentType>
+	Object& Object::RemoveComponent() {
+		size_t key = typeid(ComponentType).hash_code();
+		delete component[key];
+		component.erase(key);
 		return *this;
 	}
 }

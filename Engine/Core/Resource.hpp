@@ -45,8 +45,6 @@ namespace Engine {
 		template <typename ResourceType>
 		static void AddResource(const typename ResourceType::Data &data);
 		template <typename ResourceType>
-		static void RemoveResource(const char *name);
-		template <typename ResourceType>
 		static ResourceType* FindResource(const char *name);
 
 	private:
@@ -72,12 +70,6 @@ namespace Engine {
 	template <typename ResourceType>
 	static void ResourceManager::AddResource(ResourceType &resource) {
 		resource_manager.resource.emplace(resource.GetName(), &resource);
-	}
-
-	template <typename ResourceType>
-	static void ResourceManager::RemoveResource(const char *name) {
-		auto it = resource_manager.resource.find(name);
-		delete it->second;
 	}
 	
 	template <typename ResourceType>
