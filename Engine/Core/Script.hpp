@@ -2,14 +2,9 @@
 
 namespace Engine {
 	
-	class Scene;
-
 	class Script {
-	private:
-		Scene &scene;
-
 	public:
-		Script(Scene &scene);
+		Script();
 		virtual ~Script();
 		virtual void Start() = 0;
 		virtual void Update() = 0;

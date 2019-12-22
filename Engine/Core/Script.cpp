@@ -1,12 +1,12 @@
-#include <Core/Scene.hpp>
 #include <Core/Script.hpp>
+#include <Core/World.hpp>
 
 using namespace Engine;
 
-Script::Script(Scene &scene) : scene(scene) {
-	scene.script.insert(this);
+Script::Script() {
+	World::AddEventListener(*this);
 }
 
 Script::~Script() {
-	scene.script.erase(this);
+	World::RemoveEventListener(*this);
 }

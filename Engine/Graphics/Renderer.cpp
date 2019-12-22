@@ -3,8 +3,7 @@
 
 #include <Core/Debug.hpp>
 #include <Core/Object.hpp>
-#include <Core/Resource.hpp>
-#include <Core/Scene.hpp>
+#include <Core/World.hpp>
 #include <Graphics/Camera.hpp>
 #include <Graphics/Material.hpp>
 #include <Graphics/Mesh.hpp>
@@ -19,12 +18,12 @@ using namespace Engine;
 
 Renderer::Renderer(const Data &data)
 	: Component(data), 
-	mesh(&Resource::FindMesh(data.mesh_name)), material(&Resource::FindMaterial(data.material_name)) {
-	GetObject().GetScene().renderer.insert(this);
+	mesh(data.mesh), material(data.material) {
+	World::AddEventListener(*this);
 }
 
 Renderer::~Renderer() {
-	GetObject().GetScene().renderer.erase(this);
+	World::RemoveEventListener(*this);
 }
 
 void Renderer::Render() {

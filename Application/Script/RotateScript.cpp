@@ -5,7 +5,7 @@ using namespace glm;
 using namespace Engine;
 
 RotateScript::RotateScript(const Data &data) 
-	: Component(data), Script(GetObject().GetScene()), 
+	: Component(data), Script(),
 	rate(data.rate) {
 
 }

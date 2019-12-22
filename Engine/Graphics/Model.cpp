@@ -80,7 +80,7 @@ Model::Model(const Data &data)
 			base += 3;
 		}
 
-		mesh[midx] = new Engine::Mesh::Data{ vert[midx], attrib[midx], idx[midx], vcnt, acnt, icnt };
+		mesh[midx] = new Engine::Mesh::Data{ aimesh->mName.C_Str(), vert[midx], attrib[midx], idx[midx], vcnt, acnt, icnt };
 	}
 }
 

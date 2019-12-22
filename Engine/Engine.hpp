@@ -11,11 +11,13 @@
 #include <Core/Component.hpp>
 #include <Core/Debug.hpp>
 #include <Core/Object.hpp>
+#include <Core/Project.hpp>
 #include <Core/Resource.hpp>
-#include <Core/Scene.hpp>
 #include <Core/Script.hpp>
 #include <Core/Time.hpp>
 #include <Core/Transform.hpp>
+#include <Core/Window.hpp>
+#include <Core/World.hpp>
 
 #include <Graphics/Camera.hpp>
 #include <Graphics/Geometry.hpp>
@@ -24,5 +26,3 @@
 #include <Graphics/Model.hpp>
 #include <Graphics/Renderer.hpp>
 #include <Graphics/Texture.hpp>
-
-#include <Interaction/Window.hpp>

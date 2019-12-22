@@ -1,5 +1,5 @@
 #include <Core/Debug.hpp>
-#include <Interaction/Window.hpp>
+#include <Core/Window.hpp>
 
 #ifdef DEBUG_INTERACTION
 #define DEBUG

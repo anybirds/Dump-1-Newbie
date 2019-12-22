@@ -4,6 +4,8 @@
 
 #include <GL/glew.h>
 
+#include <Core/Resource.hpp>
+
 namespace Engine {
 
 	/*
@@ -11,12 +13,12 @@ namespace Engine {
 	
 	Represents a texture that has been created by loading images.
 	*/
-	class Texture final {
+	class Texture final : public Resource {
 	private:
 		GLuint id;
 
 	public:
-		struct Data {
+		struct Data : Resource::Data {
 			const char *texture_path;
 		};
 

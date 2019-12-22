@@ -2,6 +2,8 @@
 
 #include <GL/glew.h>
 
+#include <Core/Resource.hpp>
+
 namespace Engine {
 
 	/*
@@ -12,7 +14,7 @@ namespace Engine {
 	Mesh object can consist points in 2D, 3D or whatever dimensional space, 
 	can have multiple attributes for each vertex and can represent indexed wireframe. 
 	*/
-	class Mesh final {
+	class Mesh final : public Resource {
 	private:
 		unsigned vcnt;
 		unsigned icnt;
@@ -22,7 +24,7 @@ namespace Engine {
 		GLuint ebo;
 		
 	public:
-		struct Data {
+		struct Data : Resource::Data {
 			const float *vert;
 			const unsigned *attrib; // value 0 means that the attribute is empty
 			const unsigned *idx;

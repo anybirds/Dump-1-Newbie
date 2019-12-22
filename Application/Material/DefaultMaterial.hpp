@@ -9,7 +9,7 @@ private:
 
 public:
 	struct Data : Material::Data {
-		const char *texture_name;
+		Engine::Texture *texture;
 	};
 
 	explicit DefaultMaterial(const Data &data);

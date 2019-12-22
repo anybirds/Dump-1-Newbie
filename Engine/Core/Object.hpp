@@ -9,7 +9,6 @@
 namespace Engine {
 	
 	class Component;
-	class Scene;
 	
 	/*
 	Object
@@ -19,14 +18,12 @@ namespace Engine {
 	 */
 	class Object final {
 	private:
-		Engine::Scene *scene;
 		std::string name;
 		Transform transform;
 		std::map<size_t, Component*> component; // <hash_code, Component>
 		
 	public:
 		struct Data {
-			Engine::Scene *scene;
 			const char *name;
 			Transform::Data transform_data;
 		};
@@ -40,7 +37,6 @@ namespace Engine {
 		template <typename ComponentType>
 		Object& AddComponent(const typename ComponentType::Data &data); 
 
-		Engine::Scene& GetScene() const { return *scene; }
 		const std::string& GetName() const { return name; }
 		Object& SetName(const std::string& name) { this->name = name; return *this; }
 		Engine::Transform& GetTransform() { return transform; }
@@ -53,7 +49,7 @@ namespace Engine {
 		size_t key = typeid(ComponentType).hash_code();
 		auto it = component.find(key);
 		if (it == component.end()) {
-			// exception
+			return nullptr;
 		}
 		return dynamic_cast<ComponentType*>(it->second);
 	}

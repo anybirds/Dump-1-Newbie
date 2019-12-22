@@ -20,9 +20,9 @@ namespace Engine {
 
 	public:
 		GLFWwindow *window;
+		std::string name;
 		int width;
 		int height;
-		std::string name;
 		
 		int viewport_x;
 		int viewport_y;

@@ -1,3 +1,4 @@
+#include <Scene/Scene.hpp>
 #include <Engine.hpp>
 
 #ifdef DEBUG_APPLICATION
@@ -9,20 +10,17 @@ using namespace glm;
 using namespace Engine;
 
 int main(int argc, char **argv) {
-	// replace this code block to Engine::Init();
 	Window window({ __FUNCTION__, 800, 600 }); // replace this code to Window::Init({});
-	Resource::Init(); // replace this to Resource::Init({""});
 
 	Scene scene; // replace this to Scene scene({""});
 
-	scene.Start();
+	World::Start();
 
 	while (!window.Closed()) {
-		Time::Update();
+		Time::Tick();
 
-		scene.Update();
-		scene.Render();
-		
+		World::Update();
+		World::Render();
 		window.SwapBuffers();
 		glfwPollEvents(); // replace this to Input static function
 	}

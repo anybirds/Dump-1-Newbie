@@ -19,8 +19,8 @@ namespace Engine {
 
 	public:
 		struct Data : Component::Data {
-			const char *mesh_name; // should change this to pointer
-			const char *material_name;
+			Mesh *mesh;
+			Material *material;
 		};
 
 		explicit Renderer(const Data &data);

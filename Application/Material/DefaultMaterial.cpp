@@ -4,8 +4,8 @@
 using namespace Engine;
 
 DefaultMaterial::DefaultMaterial(const Data &data) 
-	: Material(Material::Data{data.vert_path, data.frag_path}), 
-	texture(&Resource::FindTexture(data.texture_name)) {
+	: Material(data), 
+	texture(data.texture) {
 
 }
 

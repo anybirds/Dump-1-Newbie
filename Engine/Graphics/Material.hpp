@@ -6,6 +6,8 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+#include <Core/Resource.hpp>
+
 namespace Engine {
 
 	class ShaderCreationException final : public std::exception {
@@ -55,13 +57,13 @@ namespace Engine {
 	Automatically compiles given shaders and attach it to a program object, which gets linked right after.
 	Inherit this class to create a new material with additional properties.
 	 */
-	class Material {
+	class Material : public Resource {
 	private:
 		GLuint program;
 
 		GLuint CompileShader(const char *path, GLenum type);
 	public:
-		struct Data {
+		struct Data : Resource::Data {
 			const char *vert_path;
 			const char *frag_path;
 		};

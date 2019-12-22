@@ -67,6 +67,6 @@ const unsigned Geometry::cube_idx[] = {
 	5, 4, 7
 };
 
-Mesh::Data Geometry::Triangle{ tri_vert, tri_attrib, nullptr, 3, 3, 0 };
-Mesh::Data Geometry::Square{ square_vert, square_attrib, square_idx, 4, 3, 6 };
-Mesh::Data Geometry::Cube{ cube_vert, cube_attrib, cube_idx, 8, 1, 36 };
+Mesh::Data Geometry::Triangle{ "triangle_mesh", tri_vert, tri_attrib, nullptr, 3, 3, 0 };
+Mesh::Data Geometry::Square{ "square_mesh", square_vert, square_attrib, square_idx, 4, 3, 6 };
+Mesh::Data Geometry::Cube{ "cube_mesh", cube_vert, cube_attrib, cube_idx, 8, 1, 36 };

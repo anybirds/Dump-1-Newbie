@@ -1,46 +1,96 @@
 #pragma once
 
 #include <string>
+#include <typeinfo>
 #include <unordered_map>
 
 namespace Engine {
-	
-	class Material;
-	class Model;
-	class Mesh;
-	class Texture;
 
 	/*
 	Resource
-	
-	Has mappings to find all the resources currently loaded to the game. 
+
+	Base class for all the resources such as Mateiral, Mesh, Model, Texture, etc.
 	*/
-	class Resource final {
+	class Resource {
 	private:
-		static Resource resource;
+		std::string name;
 
 	public:
-		static void Init();
-		static Material& FindMaterial(const std::string& name);
-		static Model& FindModel(const std::string& name);
-		static Mesh& FindMesh(const std::string& name);
-		//static Shader& FindShader(const std::string& name);
-		static Texture& FindTexture(const std::string& name);
+		struct Data {
+			const char *name;
+		};
 
-	private:
-		std::unordered_map<std::string, Material*> material;
-		std::unordered_map<std::string, Model*> model;
-		std::unordered_map<std::string, Mesh*> mesh;
-		// std::unordered_map<std::string, Shader*> shader;
-		std::unordered_map<std::string, Texture*> texture;
+		Resource(const Data &name);
+		virtual ~Resource();
 
-		Resource();
-
-	public:
-		Resource(const Resource &) = delete;
-		Resource(Resource&&) = delete;
-		Resource& operator=(const Resource &) = delete;
-		Resource& operator=(Resource&&) = delete;
-		~Resource();
+		const std::string& GetName() const { return name; }
+		Resource& SetName(const std::string &name) { this->name = name; return *this; }
 	};
+
+	/*
+	ResourceManager
+
+	Has mappings to find all the resources currently loaded to the game.
+	*/
+	class ResourceManager final {
+	private:
+		static ResourceManager resource_manager;
+
+		template <typename ResourceType>
+		static void AddResource(ResourceType &resource);
+		template <typename ResourceType>
+		static void RemoveResource(ResourceType &resource);
+
+	public:
+		template <typename ResourceType>
+		static void AddResource(const typename ResourceType::Data &data);
+		template <typename ResourceType>
+		static void RemoveResource(const char *name);
+		template <typename ResourceType>
+		static ResourceType* FindResource(const char *name);
+
+	private:
+		std::unordered_map<std::string, Resource*> resource;
+
+		ResourceManager();
+
+	public:
+		ResourceManager(const ResourceManager&) = delete;
+		ResourceManager(ResourceManager&&) = delete;
+		ResourceManager& operator=(const ResourceManager &) = delete;
+		ResourceManager& operator=(ResourceManager&&) = delete;
+		~ResourceManager();
+
+		friend class Resource;
+	};
+
+	template <typename ResourceType>
+	static void ResourceManager::AddResource(const typename ResourceType::Data &data) {
+		ResourceType *resource = new ResourceType(data);
+	}
+
+	template <typename ResourceType>
+	static void ResourceManager::AddResource(ResourceType &resource) {
+		resource_manager.resource.emplace(resource.GetName(), &resource);
+	}
+
+	template <typename ResourceType>
+	static void ResourceManager::RemoveResource(const char *name) {
+		auto it = resource_manager.resource.find(name);
+		delete it->second;
+	}
+	
+	template <typename ResourceType>
+	static void ResourceManager::RemoveResource(ResourceType &resource) {
+		resource_manager.resource.erase(resource.GetName());
+	}
+
+	template <typename ResourceType>
+	static ResourceType* ResourceManager::FindResource(const char *name) {
+		auto it = resource_manager.resource.find(name);
+		if (it == resource_manager.resource.end()) {
+			return nullptr;
+		}
+		return dynamic_cast<ResourceType*>(it->second);
+	}
 }

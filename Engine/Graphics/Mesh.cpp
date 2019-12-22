@@ -7,7 +7,7 @@
 
 using namespace Engine;
 
-Mesh::Mesh(const Data &data) : vcnt(data.vcnt), icnt(data.icnt) {
+Mesh::Mesh(const Data &data) : Resource(data), vcnt(data.vcnt), icnt(data.icnt) {
 	unsigned acnt = data.acnt;
 
 	const float *vert = data.vert;
