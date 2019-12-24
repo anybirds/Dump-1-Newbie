@@ -16,11 +16,7 @@ namespace Engine {
 		std::string name;
 
 	public:
-		struct Data {
-			const char *name;
-		};
-
-		Resource(const Data &name);
+		Resource(const char *name);
 		virtual ~Resource();
 
 		const std::string& GetName() const { return name; }
@@ -43,8 +39,6 @@ namespace Engine {
 
 	public:
 		template <typename ResourceType>
-		static void AddResource(const typename ResourceType::Data &data);
-		template <typename ResourceType>
 		static ResourceType* FindResource(const char *name);
 
 	private:
@@ -61,11 +55,6 @@ namespace Engine {
 
 		friend class Resource;
 	};
-
-	template <typename ResourceType>
-	static void ResourceManager::AddResource(const typename ResourceType::Data &data) {
-		ResourceType *resource = new ResourceType(data);
-	}
 
 	template <typename ResourceType>
 	static void ResourceManager::AddResource(ResourceType &resource) {

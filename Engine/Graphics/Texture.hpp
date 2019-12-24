@@ -18,11 +18,7 @@ namespace Engine {
 		GLuint id;
 
 	public:
-		struct Data : Resource::Data {
-			const char *texture_path;
-		};
-
-		explicit Texture(const Data &data);
+		Texture(const char *name, const char *texture_path);
 		~Texture();
 		GLuint GetId() const { return id; }
 	};

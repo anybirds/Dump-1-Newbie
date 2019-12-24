@@ -42,8 +42,8 @@ void Window::glewInit() {
 	glEnable(GL_DEPTH_TEST); // move this to framebuffer specification
 }
 
-Window::Window(const Data &data) 
-	: width(data.width), height(data.height), name(data.name) {
+Window::Window(const char *name, int width, int height) 
+	: name(name), width(width), height(height) {
 	Window::glfwInit();
 
 	if (!width && !height) {
@@ -54,11 +54,7 @@ Window::Window(const Data &data)
 		height = mode->height;
 	}
 
-	if (name.empty()) {
-		name = "No Title";
-	}
-
-	this->window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
+	this->window = glfwCreateWindow(width, height, name, NULL, NULL);
 	glfwMakeContextCurrent(this->window);
 
 	Window::glewInit();

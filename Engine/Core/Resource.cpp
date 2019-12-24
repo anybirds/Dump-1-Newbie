@@ -3,8 +3,8 @@
 using namespace std;
 using namespace Engine;
 
-Resource::Resource(const Data &data) : name(data.name) {
-	ResourceManager::AddResource(*this);
+Resource::Resource(const char *name) : name(name) {
+	ResourceManager::AddResource(*this); 
 }
 
 Resource::~Resource() {

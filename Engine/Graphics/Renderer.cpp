@@ -16,9 +16,9 @@
 using namespace glm;
 using namespace Engine;
 
-Renderer::Renderer(const Data &data)
-	: Component(data), 
-	mesh(data.mesh), material(data.material) {
+Renderer::Renderer(Object *object, Mesh *mesh, Material *material)
+	: Component(object), 
+	mesh(mesh), material(material) {
 	World::AddEventListener(*this);
 }
 

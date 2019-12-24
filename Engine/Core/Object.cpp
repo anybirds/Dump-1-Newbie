@@ -4,7 +4,7 @@
 
 using namespace Engine;
 
-Object::Object(const Data &object) : name(object.name), transform(object.transform_data) {
+Object::Object(const char *name, const Transform &transform) : name(name), transform(transform) {
 	World::AddObject(*this);
 }
 

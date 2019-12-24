@@ -24,7 +24,6 @@ namespace Engine {
 		static void RemoveObject(Object &object);
 
 	public:
-		static void AddObject(const Object::Data &object);
 		static Object* FindObject(const std::string &name);
 
 		template <typename EventListenerType>

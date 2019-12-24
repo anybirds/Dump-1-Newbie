@@ -8,10 +8,6 @@ using namespace Engine;
 
 World World::world;
 
-void World::AddObject(const Object::Data &data) {
-	Object *object = new Object(data);
-}
-
 void World::AddObject(Object &object) {
 	world.object.insert({ object.GetName(), &object });
 }

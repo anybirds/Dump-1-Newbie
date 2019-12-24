@@ -11,89 +11,76 @@ using namespace std;
 using namespace Assimp;
 using namespace Engine;
 
-Model::Model(const Data &data) 
-	: importer(), scene(importer.ReadFile(data.model_path, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals)) {
+bool Model::Import(const char *model_path) {
+	Assimp::Importer importer;
+	const aiScene *scene = importer.ReadFile(model_path, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 #ifdef DEBUG
-		cout << '[' << __FUNCTION__ << ']' << " cannot open file: " << data.model_path << '\n';
+		cout << '[' << __FUNCTION__ << ']' << " cannot open file: " << model_path << '\n';
 #endif
-		return;
+		return false;
 	}
 
-	mcnt = scene->mNumMeshes; 
-	vert = new float*[mcnt];
-	attrib = new unsigned*[mcnt];
-	idx = new unsigned*[mcnt];
-	mesh = new Mesh::Data*[mcnt];
-
+	float mcnt = scene->mNumMeshes; 
 	for (unsigned midx = 0; midx < mcnt; midx++) {
 		aiMesh *aimesh = scene->mMeshes[midx];
 		unsigned base;
 
 		unsigned acnt = 3;
-		attrib[midx] = new unsigned[acnt];
+		unsigned *attrib = new unsigned[acnt];
 		if (aimesh->HasPositions()) {
-			attrib[midx][0] = 3;
+			attrib[0] = 3;
 		}
 		if (aimesh->HasNormals()) {
-			attrib[midx][1] = 3;
+			attrib[1] = 3;
 		}
 		if (aimesh->HasTextureCoords(0)) {
-			attrib[midx][2] = 2;
+			attrib[2] = 2;
 		}
 		unsigned asize = 0; // number of floats for each vertex 
 		for (unsigned i = 0; i < acnt; i++) {
-			asize += attrib[midx][i];
+			asize += attrib[i];
 		}
 
 		unsigned vcnt = aimesh->mNumVertices;
-		vert[midx] = new float[vcnt * asize];
+		float *vert = new float[vcnt * asize];
 		base = 0;
 		for (unsigned i = 0; i < aimesh->mNumVertices; i++) {
 			if (aimesh->HasPositions()) {
-				vert[midx][base] = aimesh->mVertices[i].x;
-				vert[midx][base + 1] = aimesh->mVertices[i].y;
-				vert[midx][base + 2] = aimesh->mVertices[i].z;
+				vert[base] = aimesh->mVertices[i].x;
+				vert[base + 1] = aimesh->mVertices[i].y;
+				vert[base + 2] = aimesh->mVertices[i].z;
 				base += 3;
 			}
 			if (aimesh->HasNormals()) {
-				vert[midx][base] = aimesh->mNormals[i].x;
-				vert[midx][base + 1] = aimesh->mNormals[i].y;
-				vert[midx][base + 2] = aimesh->mNormals[i].z;
+				vert[base] = aimesh->mNormals[i].x;
+				vert[base + 1] = aimesh->mNormals[i].y;
+				vert[base + 2] = aimesh->mNormals[i].z;
 				base += 3;
 			}
 			if (aimesh->HasTextureCoords(0)) { // texture coordinate set 0
-				vert[midx][base] = aimesh->mTextureCoords[0][i].x;
-				vert[midx][base + 1] = aimesh->mTextureCoords[0][i].y;
+				vert[base] = aimesh->mTextureCoords[0][i].x;
+				vert[base + 1] = aimesh->mTextureCoords[0][i].y;
 				base += 2;
 			}
 		}
 
 		unsigned icnt = aimesh->mNumFaces * 3;
-		idx[midx] = new unsigned[icnt];
+		unsigned *idx = new unsigned[icnt];
 		base = 0;
 		for (unsigned i = 0; i < aimesh->mNumFaces; i++) {
-			idx[midx][base] = aimesh->mFaces[i].mIndices[0];
-			idx[midx][base + 1] = aimesh->mFaces[i].mIndices[1];
-			idx[midx][base + 2] = aimesh->mFaces[i].mIndices[2];
+			idx[base] = aimesh->mFaces[i].mIndices[0];
+			idx[base + 1] = aimesh->mFaces[i].mIndices[1];
+			idx[base + 2] = aimesh->mFaces[i].mIndices[2];
 			base += 3;
 		}
 
-		mesh[midx] = new Engine::Mesh::Data{ aimesh->mName.C_Str(), vert[midx], attrib[midx], idx[midx], vcnt, acnt, icnt };
+		Mesh *mesh = new Mesh(aimesh->mName.C_Str(), vert, vcnt, attrib, acnt, idx, icnt);
+		delete vert;
+		delete attrib;
+		delete idx;
 	}
-}
 
-Model::~Model() {
-	for (unsigned i = 0; i < mcnt; i++) {
-		if (vert[i]) {
-			delete vert[i];
-		}
-		if (attrib[i]) {
-			delete attrib[i];
-		}
-		if (idx[i]) {
-			delete idx[i];
-		}
-	}
+	return true;
 }

@@ -10,27 +10,32 @@ using namespace Engine;
 #define DEBUG
 
 Scene::Scene() {
-	Model bunny_model({ "Resource\\Model\\bunny_model.obj" }); // remove this from here: model should be converted to resources before scene creation
+	Model::Import("Resource\\Model\\square_model.obj");
+	Model::Import("Resource\\Model\\bunny_model.obj");
 	
-	ResourceManager::AddResource<Mesh>(Geometry::Square);
-	ResourceManager::AddResource<Mesh>(bunny_model.MeshData(0));
-	ResourceManager::AddResource<Texture>({ "bunny_texture", "Resource\\Texture\\bunny_texture.png" });
-	ResourceManager::AddResource<DefaultMaterial>({ "bunny_material", "Resource\\Shader\\unlit_vert.glsl", "Resource\\Shader\\unlit_frag.glsl", ResourceManager::FindResource<Texture>("bunny_texture") });
-
-	Object *camera = new Object({ "Camera", { vec3(0.0f, 0.0f, 5.0f), mat4(1.0f), vec3(1.0f), nullptr } });
-	camera->AddComponent<Camera>({ camera, perspective(radians(60.0f), 800.0f / 600.0f, 0.1f, 1000.0f) }); // width / height
+	Texture *bunny_texture = new Texture("bunny_texture", "Resource\\Texture\\bunny_texture.png");
+	DefaultMaterial *bunny_material = new DefaultMaterial("bunny_material", "Resource\\Shader\\unlit_vert.glsl", "Resource\\Shader\\unlit_frag.glsl", bunny_texture);
 	
-	Object *square = new Object({ "Square", { vec3(-2.0f, 0.0f, 0.0f), mat4(1.0f), vec3(1.0f) } });
-	square->AddComponent<Renderer>({ square, ResourceManager::FindResource<Mesh>("square_mesh"), ResourceManager::FindResource<Material>("bunny_material") });
+	Object *camera = new Object("camera", { vec3(0.0f, 0.0f, 5.0f), mat4(1.0f), vec3(1.0f) });
+	Camera *camera_camera = camera->AddComponent<Camera>();
+	camera_camera->SetNormalization(perspective(radians(60.0f), 800.0f / 600.0f, 0.1f, 1000.0f));
 	
-	Object *bunny = new Object({ "Bunny", { vec3(2.0f, 0.0f, 0.0f), rotate(mat4(1.0f), radians(90.0f), vec3(0.0f, 1.0f, 0.0f)), vec3(2.0f) } });
-	bunny->AddComponent<Renderer>({ bunny, ResourceManager::FindResource<Mesh>("bunny_mesh"), ResourceManager::FindResource<Material>("bunny_material") });
-	bunny->AddComponent<RotateScript>({ bunny, 90.0f });
+	Object *square = new Object("square", { vec3(-2.0f, 0.0f, 0.0f), mat4(1.0f), vec3(1.0f) });
+	Renderer *square_renderer = square->AddComponent<Renderer>();
+	square_renderer->SetMesh(*ResourceManager::FindResource<Mesh>("square_mesh"));
+	square_renderer->SetMaterial(*ResourceManager::FindResource<Material>("bunny_material"));
 	
-	Camera::SetCurrentCamera(*World::FindObject("Camera")->GetComponent<Camera>()); // scene should have current camera settings
+	Object *bunny = new Object("bunny", { vec3(2.0f, 0.0f, 0.0f), rotate(mat4(1.0f), radians(90.0f), vec3(0.0f, 1.0f, 0.0f)), vec3(2.0f) });
+	Renderer *bunny_renderer = bunny->AddComponent<Renderer>();
+	bunny_renderer->SetMesh(*ResourceManager::FindResource<Mesh>("bunny_mesh"));
+	bunny_renderer->SetMaterial(*ResourceManager::FindResource<Material>("bunny_material"));
+	RotateScript *bunny_rotatescript = bunny->AddComponent<RotateScript>();
+	bunny_rotatescript->SetRate(90.0f);
+	
+	Camera::SetCurrentCamera(*World::FindObject("camera")->GetComponent<Camera>()); // scene should have current camera settings
 
 #ifdef DEBUG
-	cout << '[' << __FUNCTION__ << ']' << " Scene created." << endl;
+	cout << '[' << __FUNCTION__ << ']' << " Scene loaded successfully." << endl;
 #endif
 }
 

@@ -18,12 +18,7 @@ namespace Engine {
 		Material *material;
 
 	public:
-		struct Data : Component::Data {
-			Mesh *mesh;
-			Material *material;
-		};
-
-		explicit Renderer(const Data &data);
+		Renderer(Object *object, Mesh *mesh = nullptr, Material *material = nullptr);
 		~Renderer();
 
 		const Engine::Mesh& GetMesh() const { return *mesh; }

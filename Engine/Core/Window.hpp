@@ -30,12 +30,7 @@ namespace Engine {
 		int viewport_height;
 
 	public:
-		struct Data {
-			const char *name;
-			int width;
-			int height;
-		};
-		explicit Window(const Data &data);
+		Window(const char *name, int width, int height);
 		~Window();
 
 		int GetWidth() const { return width; };

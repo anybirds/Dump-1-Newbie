@@ -24,17 +24,10 @@ namespace Engine {
 		GLuint ebo;
 		
 	public:
-		struct Data : Resource::Data {
-			const float *vert;
-			const unsigned *attrib; // value 0 means that the attribute is empty
-			const unsigned *idx;
-			unsigned vcnt;
-			unsigned acnt; // max index of attributes a vertex can have according to the shader
-			unsigned icnt;
-		};
 
 		/* acquires resources(VAO, VBO, EBO) needed to generate a mesh for a model */
-		explicit Mesh(const Data &data);
+		Mesh(const char *name, const float *vert, unsigned vcnt, const unsigned *attrib, unsigned acnt, const unsigned *idx = nullptr, unsigned icnt = 0);
+		Mesh(const char *name, const char *model_path, unsigned midx = 0);
 		~Mesh();
 
 		friend class Renderer;

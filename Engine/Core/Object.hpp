@@ -23,18 +23,13 @@ namespace Engine {
 		std::map<size_t, Component*> component; // <hash_code, Component>
 
 	public:
-		struct Data {
-			const char *name;
-			Transform::Data transform_data;
-		};
-
-		explicit Object(const Data &data);
+		Object(const char *name, const Transform &transform);
 		~Object();
 
 		template <typename ComponentType>
 		ComponentType* GetComponent();
 		template <typename ComponentType>
-		Object& AddComponent(const typename ComponentType::Data &data);
+		ComponentType* AddComponent();
 		template <typename ComponentType>
 		Object& RemoveComponent();
 
@@ -56,11 +51,11 @@ namespace Engine {
 	}
 
 	template <typename ComponentType>
-	Object& Object::AddComponent(const typename ComponentType::Data &data) {
+	ComponentType* Object::AddComponent() {
 		size_t key = typeid(ComponentType).hash_code();
-		ComponentType *value = new ComponentType(data);
+		ComponentType *value = new ComponentType(this);
 		this->component.insert({ key, value });
-		return *this;
+		return value;
 	}
 
 	template <typename ComponentType>

@@ -22,10 +22,11 @@ namespace Engine {
 			glm::vec3 position;
 			glm::mat4 rotation;
 			glm::vec3 scale;
-			const class Transform *parent;
+			const Transform *parent;
 		};
 
-		Transform(const Data &data);
+		Transform();
+		Transform(const glm::vec3 &position, const glm::mat4 &rotation, const glm::vec3 &scale, const Transform *parent = nullptr);
 		~Transform();
 
 		glm::vec3 GetPosition() const { return position; }

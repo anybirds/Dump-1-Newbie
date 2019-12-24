@@ -63,12 +63,7 @@ namespace Engine {
 
 		GLuint CompileShader(const char *path, GLenum type);
 	public:
-		struct Data : Resource::Data {
-			const char *vert_path;
-			const char *frag_path;
-		};
-
-		explicit Material(const Data &data);
+		Material(const char *name, const char *vert_path, const char *frag_path);
 		virtual ~Material();
 		virtual void Uniform() const = 0;
 

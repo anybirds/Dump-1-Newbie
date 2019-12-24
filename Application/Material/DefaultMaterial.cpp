@@ -3,9 +3,8 @@
 
 using namespace Engine;
 
-DefaultMaterial::DefaultMaterial(const Data &data) 
-	: Material(data), 
-	texture(data.texture) {
+DefaultMaterial::DefaultMaterial(const char *name, const char *vert_path, const char *frag_path, Engine::Texture *texture)
+	: Material(name, vert_path, frag_path), texture(texture) {
 
 }
 

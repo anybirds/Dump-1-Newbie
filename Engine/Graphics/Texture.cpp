@@ -9,12 +9,12 @@
 
 using namespace Engine;
 
-Texture::Texture(const Data &data) : Resource(data) {
+Texture::Texture(const char *name, const char *texture_path) : Resource(name) {
 	int width, height, channel;
-	unsigned char *image = SOIL_load_image(data.texture_path, &width, &height, &channel, SOIL_LOAD_AUTO);
+	unsigned char *image = SOIL_load_image(texture_path, &width, &height, &channel, SOIL_LOAD_AUTO);
 	if (!image) {
 #ifdef DEBUG
-		cout << '[' << __FUNCTION__ << ']' << " cannot load image file: " << data.texture_path << '\n';
+		cout << '[' << __FUNCTION__ << ']' << " cannot load image file: " << texture_path << '\n';
 #endif
 	}
 

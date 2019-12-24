@@ -4,9 +4,9 @@
 using namespace glm;
 using namespace Engine;
 
-RotateScript::RotateScript(const Data &data) 
-	: Component(data), Script(),
-	rate(data.rate) {
+RotateScript::RotateScript(Object *object, float rate) 
+	: Component(object), Script(),
+	rate(rate) {
 
 }
 

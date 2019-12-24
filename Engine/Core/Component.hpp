@@ -14,11 +14,8 @@ namespace Engine {
 		Object *object;
 
 	public:
-		struct Data {
-			Object *object;
-		};
 
-		explicit Component(const Data &data);
+		Component(Object *object);
 		virtual ~Component();
 
 		Engine::Object& GetObject() const { return *object; }

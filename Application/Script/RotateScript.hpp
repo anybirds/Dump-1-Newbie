@@ -8,12 +8,11 @@ private:
 	float rate;
 
 public:
-	struct Data : Component::Data {
-		float rate;
-	};
-	
-	explicit RotateScript(const Data &data);
+	RotateScript(Engine::Object *object, float rate = 0.0f);
 	virtual ~RotateScript();
 	virtual void Start();
 	virtual void Update();
+
+	float GetRate() { return rate; }
+	RotateScript& SetRate(float rate) { this->rate = rate; return *this; }
 };

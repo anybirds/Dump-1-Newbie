@@ -10,8 +10,12 @@
 using namespace glm;
 using namespace Engine;
 
-Transform::Transform(const Data &data) 
-	: position(data.position), rotation(data.rotation), scale(data.scale), parent(data.parent) {
+Transform::Transform() {
+
+}
+
+Transform::Transform(const glm::vec3 &position, const glm::mat4 &rotation, const glm::vec3 &scale, const Transform *parent)
+	: position(position), rotation(rotation), scale(scale), parent(parent) {
 
 }
 

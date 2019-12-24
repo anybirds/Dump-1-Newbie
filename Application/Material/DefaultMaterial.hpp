@@ -8,11 +8,7 @@ private:
 	Engine::Texture *texture;
 
 public:
-	struct Data : Material::Data {
-		Engine::Texture *texture;
-	};
-
-	explicit DefaultMaterial(const Data &data);
+	DefaultMaterial(const char *name, const char *vert_path, const char *frag_path, Engine::Texture *texture);
 	~DefaultMaterial();
 	virtual void Uniform() const;
 	const Engine::Texture& GetTexture() { return *texture; }

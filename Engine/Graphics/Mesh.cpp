@@ -7,12 +7,8 @@
 
 using namespace Engine;
 
-Mesh::Mesh(const Data &data) : Resource(data), vcnt(data.vcnt), icnt(data.icnt) {
-	unsigned acnt = data.acnt;
-
-	const float *vert = data.vert;
-	const unsigned *attrib = data.attrib;
-	const unsigned *idx = data.idx;
+Mesh::Mesh(const char *name, const float *vert, unsigned vcnt, const unsigned *attrib, unsigned acnt, const unsigned *idx, unsigned icnt) 
+	: Resource(name), vcnt(vcnt), icnt(icnt) {
 
 	// generate
 	glGenVertexArrays(1, &vao);
@@ -56,6 +52,11 @@ Mesh::Mesh(const Data &data) : Resource(data), vcnt(data.vcnt), icnt(data.icnt) 
 		<<" Mesh created." << endl;
 #endif
 
+}
+
+Mesh::Mesh(const char *name, const char *model_path, unsigned midx) 
+	: Resource(name) {
+	
 }
 
 Mesh::~Mesh() {

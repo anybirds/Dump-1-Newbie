@@ -25,11 +25,7 @@ namespace Engine {
 		glm::mat4 normalization;
 
 	public:
-		struct Data : Component::Data {
-			glm::mat4 normalization;
-		};
-
-		explicit Camera(const Data &data);
+		Camera(Object *object, const glm::mat4 &normalization = glm::mat4(1.0f));
 		~Camera();
 		
 		glm::mat4 GetNormalization() const { return normalization; }
