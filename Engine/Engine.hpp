@@ -14,6 +14,7 @@
 #include <Core/Project.hpp>
 #include <Core/Resource.hpp>
 #include <Core/Script.hpp>
+#include <Core/Storage.hpp>
 #include <Core/Time.hpp>
 #include <Core/Transform.hpp>
 #include <Core/Window.hpp>

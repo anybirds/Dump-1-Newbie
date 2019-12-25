@@ -1,25 +1,14 @@
 #include <Core/Resource.hpp>
+#include <Core/Storage.hpp>
 
 using namespace std;
 using namespace Engine;
 
 Resource::Resource(const char *name) : name(name) {
-	ResourceManager::AddResource(*this); 
+	Storage::AddResource(*this); 
 }
 
 Resource::~Resource() {
-	ResourceManager::RemoveResource(*this);
-}
-
-ResourceManager ResourceManager::resource_manager;
-
-ResourceManager::ResourceManager() {
-
-}
-
-ResourceManager::~ResourceManager() {
-	for (auto item : resource) {
-		delete item.second; 
-	}
+	Storage::RemoveResource(*this);
 }
 

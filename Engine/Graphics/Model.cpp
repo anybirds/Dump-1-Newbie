@@ -22,7 +22,7 @@ bool Model::Import(const char *model_path) {
 		return false;
 	}
 
-	float mcnt = scene->mNumMeshes; 
+	unsigned mcnt = scene->mNumMeshes; 
 	for (unsigned midx = 0; midx < mcnt; midx++) {
 		aiMesh *aimesh = scene->mMeshes[midx];
 		unsigned base;

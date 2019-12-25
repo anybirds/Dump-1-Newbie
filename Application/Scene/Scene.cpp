@@ -22,13 +22,13 @@ Scene::Scene() {
 	
 	Object *square = new Object("square", { vec3(-2.0f, 0.0f, 0.0f), mat4(1.0f), vec3(1.0f) });
 	Renderer *square_renderer = square->AddComponent<Renderer>();
-	square_renderer->SetMesh(*ResourceManager::FindResource<Mesh>("square_mesh"));
-	square_renderer->SetMaterial(*ResourceManager::FindResource<Material>("bunny_material"));
+	square_renderer->SetMesh(*Storage::FindResource<Mesh>("square_mesh"));
+	square_renderer->SetMaterial(*Storage::FindResource<Material>("bunny_material"));
 	
 	Object *bunny = new Object("bunny", { vec3(2.0f, 0.0f, 0.0f), rotate(mat4(1.0f), radians(90.0f), vec3(0.0f, 1.0f, 0.0f)), vec3(2.0f) });
 	Renderer *bunny_renderer = bunny->AddComponent<Renderer>();
-	bunny_renderer->SetMesh(*ResourceManager::FindResource<Mesh>("bunny_mesh"));
-	bunny_renderer->SetMaterial(*ResourceManager::FindResource<Material>("bunny_material"));
+	bunny_renderer->SetMesh(*Storage::FindResource<Mesh>("bunny_mesh"));
+	bunny_renderer->SetMaterial(*Storage::FindResource<Material>("bunny_material"));
 	RotateScript *bunny_rotatescript = bunny->AddComponent<RotateScript>();
 	bunny_rotatescript->SetRate(90.0f);
 	
