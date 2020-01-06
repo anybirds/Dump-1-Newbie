@@ -17,6 +17,7 @@ target_link_libraries(Engine Core)
 
 set_target_properties(
   Engine PROPERTIES
+  VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.6.1"
   COMMON_LANGUAGE_RUNTIME ""
   CXX_STANDARD 17
   CXX_STANDARD_REQUIRED ON

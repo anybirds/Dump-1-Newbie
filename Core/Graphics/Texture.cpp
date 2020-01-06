@@ -1,15 +1,18 @@
+#include <iostream>
+
 #include <SOIL/SOIL.h>
 
-#include <Core/Debug.hpp>
+#include <Common/Debug.hpp>
 #include <Graphics/Texture.hpp>
 
 #ifdef DEBUG_GRAPHICS
 #define DEBUG
 #endif
 
-using namespace Engine;
+using namespace std;
+using namespace Core;
 
-Texture::Texture(const char *name, const char *texture_path) : Resource(name) {
+Texture::Texture(const char *texture_path) {
 	int width, height, channel;
 	unsigned char *image = SOIL_load_image(texture_path, &width, &height, &channel, SOIL_LOAD_AUTO);
 	if (!image) {

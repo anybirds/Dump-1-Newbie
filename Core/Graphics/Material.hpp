@@ -6,9 +6,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include <Core/Resource.hpp>
-
-namespace Engine {
+namespace Core {
 
 	class ShaderCreationException final : public std::exception {
 	public:
@@ -51,19 +49,17 @@ namespace Engine {
 	};
 
 	/*
-	Material
-
-	Abstract class that defines how the objects are being drawn. 
+	Defines how a Mesh is being drawn.
 	Automatically compiles given shaders and attach it to a program object, which gets linked right after.
 	Inherit this class to create a new material with additional properties.
 	 */
-	class Material : public Resource {
+	class Material {
 	private:
 		GLuint program;
 
 		GLuint CompileShader(const char *path, GLenum type);
 	public:
-		Material(const char *name, const char *vert_path, const char *frag_path);
+		Material(const char *vert_path, const char *frag_path);
 		virtual ~Material();
 		virtual void Uniform() const = 0;
 

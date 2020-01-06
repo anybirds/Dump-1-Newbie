@@ -1,14 +1,17 @@
-#include <Core/Debug.hpp>
+#include <iostream>
+
+#include <Common/Debug.hpp>
 #include <Graphics/Mesh.hpp>
 
 #ifdef DEBUG_GRAPHICS
 #define DEBUG
 #endif
 
-using namespace Engine;
+using namespace std;
+using namespace Core;
 
-Mesh::Mesh(const char *name, const float *vert, unsigned vcnt, const unsigned *attrib, unsigned acnt, const unsigned *idx, unsigned icnt) 
-	: Resource(name), vcnt(vcnt), icnt(icnt) {
+Mesh::Mesh(const float *vert, int vcnt, const int *attrib, int acnt, const int *idx, int icnt) 
+	: vcnt(vcnt), icnt(icnt) {
 
 	// generate
 	glGenVertexArrays(1, &vao);
@@ -19,8 +22,8 @@ Mesh::Mesh(const char *name, const float *vert, unsigned vcnt, const unsigned *a
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	
 	// data
-	unsigned stride = 0;
-	for (unsigned i = 0; i < acnt; i++) {
+	int stride = 0;
+	for (int i = 0; i < acnt; i++) {
 		stride += attrib[i];
 	}
 	stride *= sizeof(float);
@@ -28,7 +31,7 @@ Mesh::Mesh(const char *name, const float *vert, unsigned vcnt, const unsigned *a
 
 	// attribute
 	float *offset = nullptr;
-	for (unsigned i = 0; i < acnt; i++) {
+	for (int i = 0; i < acnt; i++) {
 		if (attrib[i]) {
 			glEnableVertexAttribArray(i);
 			glVertexAttribPointer(i, attrib[i], GL_FLOAT, GL_FALSE, stride, (void *)offset);
@@ -40,7 +43,7 @@ Mesh::Mesh(const char *name, const float *vert, unsigned vcnt, const unsigned *a
 		// indexed wireframe
 		glGenBuffers(1, &ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, icnt * sizeof(unsigned), idx, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, icnt * sizeof(int), idx, GL_STATIC_DRAW);
 	}
 
 	// restore
@@ -52,11 +55,6 @@ Mesh::Mesh(const char *name, const float *vert, unsigned vcnt, const unsigned *a
 		<<" Mesh created." << endl;
 #endif
 
-}
-
-Mesh::Mesh(const char *name, const char *model_path, unsigned midx) 
-	: Resource(name) {
-	
 }
 
 Mesh::~Mesh() {

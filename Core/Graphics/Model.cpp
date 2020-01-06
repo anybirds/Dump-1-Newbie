@@ -1,6 +1,7 @@
+#include <iostream>
 #include <map>
 
-#include <Core/Debug.hpp>
+#include <Common/Debug.hpp>
 #include <Graphics/Model.hpp>
 
 #ifdef DEBUG_GRAPHICS
@@ -9,7 +10,7 @@
 
 using namespace std;
 using namespace Assimp;
-using namespace Engine;
+using namespace Core;
 
 bool Model::Import(const char *model_path) {
 	Assimp::Importer importer;
@@ -22,13 +23,13 @@ bool Model::Import(const char *model_path) {
 		return false;
 	}
 
-	unsigned mcnt = scene->mNumMeshes; 
-	for (unsigned midx = 0; midx < mcnt; midx++) {
+	int mcnt = scene->mNumMeshes; 
+	for (int midx = 0; midx < mcnt; midx++) {
 		aiMesh *aimesh = scene->mMeshes[midx];
-		unsigned base;
+		int base;
 
-		unsigned acnt = 3;
-		unsigned *attrib = new unsigned[acnt];
+		int acnt = 3;
+		int *attrib = new int[acnt];
 		if (aimesh->HasPositions()) {
 			attrib[0] = 3;
 		}
@@ -38,15 +39,15 @@ bool Model::Import(const char *model_path) {
 		if (aimesh->HasTextureCoords(0)) {
 			attrib[2] = 2;
 		}
-		unsigned asize = 0; // number of floats for each vertex 
-		for (unsigned i = 0; i < acnt; i++) {
+		int asize = 0; // number of floats for each vertex 
+		for (int i = 0; i < acnt; i++) {
 			asize += attrib[i];
 		}
 
-		unsigned vcnt = aimesh->mNumVertices;
+		int vcnt = aimesh->mNumVertices;
 		float *vert = new float[vcnt * asize];
 		base = 0;
-		for (unsigned i = 0; i < aimesh->mNumVertices; i++) {
+		for (int i = 0; i < aimesh->mNumVertices; i++) {
 			if (aimesh->HasPositions()) {
 				vert[base] = aimesh->mVertices[i].x;
 				vert[base + 1] = aimesh->mVertices[i].y;
@@ -66,17 +67,17 @@ bool Model::Import(const char *model_path) {
 			}
 		}
 
-		unsigned icnt = aimesh->mNumFaces * 3;
-		unsigned *idx = new unsigned[icnt];
+		int icnt = aimesh->mNumFaces * 3;
+		int *idx = new int[icnt];
 		base = 0;
-		for (unsigned i = 0; i < aimesh->mNumFaces; i++) {
+		for (int i = 0; i < aimesh->mNumFaces; i++) {
 			idx[base] = aimesh->mFaces[i].mIndices[0];
 			idx[base + 1] = aimesh->mFaces[i].mIndices[1];
 			idx[base + 2] = aimesh->mFaces[i].mIndices[2];
 			base += 3;
 		}
 
-		Mesh *mesh = new Mesh(aimesh->mName.C_Str(), vert, vcnt, attrib, acnt, idx, icnt);
+		Mesh *mesh = new Mesh(vert, vcnt, attrib, acnt, idx, icnt);
 		delete vert;
 		delete attrib;
 		delete idx;

@@ -1,12 +1,16 @@
-#include <Core/Script.hpp>
-#include <Core/World.hpp>
+#include <Common/Debug.hpp>
+#include <Common/Script.hpp>
 
-using namespace Engine;
+#ifdef DEBUG_COMMON
+#define DEBUG
+#endif
 
-Script::Script() {
-	World::AddEventListener(*this);
+using namespace Core;
+
+Script::Script(GameObject *object) : Component(object) {
+
 }
 
 Script::~Script() {
-	World::RemoveEventListener(*this);
+	
 }

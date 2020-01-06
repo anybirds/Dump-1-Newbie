@@ -6,7 +6,7 @@
 
 #include <Graphics/Mesh.hpp>
 
-namespace Engine {
+namespace Core {
 
 	class Model final {
 	public:

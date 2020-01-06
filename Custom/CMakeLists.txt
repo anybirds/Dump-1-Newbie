@@ -9,7 +9,7 @@ if(MSVC)
 endif()
 
 add_library(Custom SHARED ${CUSTOM_SOURCE})
-add_definition(-DEXPMODULE)
+add_definitions(-DEXPMODULE)
 
 set_target_properties(
   Custom PROPERTIES
@@ -29,6 +29,7 @@ set_property(TARGET Custom PROPERTY VS_DOTNET_REFERENCES
   "System.Data"
   "System.Data.DataSetExtensions"
   "System.Net.Http"
+  "System.Numerics"
   "System.Xaml"
   "System.Xml"
   "System.Xml.Linq"

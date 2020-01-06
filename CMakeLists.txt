@@ -24,4 +24,4 @@ add_dependencies(Custom Engine)
 add_dependencies(Editor Custom)
 add_dependencies(App Custom)
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Editor)

@@ -1,23 +1,17 @@
 #pragma once
 
-namespace Engine {
-
-	class Object;
-
-	/*
-	Component
+namespace Core {
 	
-	Base class for components that comprise an Object.
-	*/
+	class GameObject;
+	
 	class Component {
 	private:
-		Object *object;
+		GameObject *const object;
 
 	public:
-
-		Component(Object *object);
+		Component(GameObject *object);
 		virtual ~Component();
 
-		Engine::Object& GetObject() const { return *object; }
+		GameObject* GetGameObject() const { return object; }
 	};
 }

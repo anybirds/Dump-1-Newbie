@@ -1,9 +1,9 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include <Core/Debug.hpp>
-#include <Core/Object.hpp>
-#include <Core/World.hpp>
+#include <Common/Debug.hpp>
+#include <Common/GameObject.hpp>
+#include <Common/Transform.hpp>
 #include <Graphics/Camera.hpp>
 #include <Graphics/Material.hpp>
 #include <Graphics/Mesh.hpp>
@@ -14,16 +14,16 @@
 #endif
 
 using namespace glm;
-using namespace Engine;
+using namespace Core;
 
-Renderer::Renderer(Object *object, Mesh *mesh, Material *material)
+Renderer::Renderer(GameObject *object, Mesh *mesh, Material *material)
 	: Component(object), 
 	mesh(mesh), material(material) {
-	World::AddEventListener(*this);
+	
 }
 
 Renderer::~Renderer() {
-	World::RemoveEventListener(*this);
+	
 }
 
 void Renderer::Render() {
@@ -34,15 +34,15 @@ void Renderer::Render() {
 
 	GLuint location;
 
-	// object must have transform
+	// GameObject must have transform
 	location = glGetUniformLocation(material->program, "model_transform");
-	mat4 model_transform = GetObject().GetTransform().GetMatrix();
+	mat4 model_transform = GetGameObject()->GetTransform()->GetMatrix();
 	glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&model_transform);
 
 	if (Camera::GetCurrentCamera()) {
 		// render with scene camera
 		location = glGetUniformLocation(material->program, "camera_transform");
-		mat4 camera_transform = Camera::GetCurrentCamera()->GetObject().GetTransform().GetMatrix();
+		mat4 camera_transform = Camera::GetCurrentCamera()->GetGameObject()->GetTransform()->GetMatrix();
 		glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)&camera_transform);
 		location = glGetUniformLocation(material->program, "camera_normalization");
 		mat4 normalization = Camera::GetCurrentCamera()->GetNormalization();

@@ -1,7 +1,8 @@
 #include <fstream>
+#include <iostream>
 #include <sstream>
 
-#include <Core/Debug.hpp>
+#include <Common/Debug.hpp>
 #include <Graphics/Material.hpp>
 
 #ifdef DEBUG_GRAPHICS
@@ -9,7 +10,7 @@
 #endif
 
 using namespace std;
-using namespace Engine;
+using namespace Core;
 
 GLuint Material::CompileShader(const char *path, GLenum type) {
 	GLuint shader;
@@ -53,7 +54,7 @@ GLuint Material::CompileShader(const char *path, GLenum type) {
 	return shader;
 }
 
-Material::Material(const char *name, const char *vert_path, const char *frag_path) : Resource(name) {
+Material::Material(const char *vert_path, const char *frag_path) {
 	// Delete the program that is alreay linked
 	// todo: this is terribly inefficient when there alreay is a compiled version of vertex and fragment shaders. 
 	glDeleteProgram(program);

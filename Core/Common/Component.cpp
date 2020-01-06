@@ -1,8 +1,13 @@
-#include <Core/Component.hpp>
+#include <Common/Component.hpp>
+#include <Common/Debug.hpp>
 
-using namespace Engine;
+#ifdef DEBUG_COMMON
+#define DEBUG
+#endif
 
-Component::Component(Object *object) : object(object) {
+using namespace Core;
+
+Component::Component(GameObject *object) : object(object) {
 
 }
 

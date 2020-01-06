@@ -1,20 +1,20 @@
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <Core/Debug.hpp>
-#include <Core/Transform.hpp>
+#include <Common/Debug.hpp>
+#include <Common/Transform.hpp>
 
-#ifdef DEBUG_CORE
+#ifdef DEBUG_COMMON
 #define DEBUG
 #endif
 
 using namespace glm;
-using namespace Engine;
+using namespace Core;
 
 Transform::Transform() {
 
 }
 
-Transform::Transform(const glm::vec3 &position, const glm::mat4 &rotation, const glm::vec3 &scale, const Transform *parent)
+Transform::Transform(const glm::vec3 &position, const glm::mat4 &rotation, const glm::vec3 &scale, Transform *parent)
 	: position(position), rotation(rotation), scale(scale), parent(parent) {
 
 }

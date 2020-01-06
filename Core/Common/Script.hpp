@@ -1,18 +1,11 @@
 #pragma once
 
-namespace Engine {
-	
-	/*
-	Script
-	
-	Interface for user defined callback functions, such as Start and Update. 
-	Multiple inheritance with Component is used to make a user defined script component.
-	*/
-	class Script {
+#include <Common/Component.hpp>
+
+namespace Core {
+	class Script final : public Component {
 	public:
-		Script();
-		virtual ~Script();
-		virtual void Start() = 0;
-		virtual void Update() = 0;
+		Script(GameObject *object);
+		~Script();
 	};
 }
