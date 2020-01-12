@@ -7,7 +7,7 @@
 
 using namespace Core;
 
-Script::Script(GameObject *object) : Component(object) {
+Script::Script() {
 
 }
 

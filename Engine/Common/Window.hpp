@@ -24,5 +24,6 @@ namespace Engine {
 		
 		bool ShouldClose();
 		void SwapBuffers();
+		void PollEvents();
 	};
 }

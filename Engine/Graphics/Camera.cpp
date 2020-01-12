@@ -4,7 +4,7 @@
 using namespace Engine;
 
 Camera::Camera(GameObject ^gameObject) 
-	: ManagedObject<Core::Camera>(new Core::Camera(gameObject->instance)), m_gameObject(gameObject) {
+	: ManagedObject<Core::Camera>(new Core::Camera()), m_gameObject(gameObject) {
 
 }
 

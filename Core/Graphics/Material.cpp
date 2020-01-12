@@ -1,94 +1,171 @@
-#include <fstream>
+#include <algorithm>
+#include <exception>
 #include <iostream>
-#include <sstream>
+#include <vector>
 
 #include <Common/Debug.hpp>
 #include <Graphics/Material.hpp>
+#include <Graphics/Shader.hpp>
+#include <Graphics/Texture.hpp>
 
 #ifdef DEBUG_GRAPHICS
 #define DEBUG
 #endif
 
 using namespace std;
+using namespace glm;
 using namespace Core;
 
-GLuint Material::CompileShader(const char *path, GLenum type) {
-	GLuint shader;
-	switch (type) {
-	case GL_VERTEX_SHADER:
-		shader = glCreateShader(GL_VERTEX_SHADER);
-		break;
-	case GL_GEOMETRY_SHADER:
-		shader = glCreateShader(GL_GEOMETRY_SHADER);
-		break;
-	case GL_FRAGMENT_SHADER:
-		shader = glCreateShader(GL_FRAGMENT_SHADER);
-		break;
-	default:
-		// Not readched
-		break;
-	}
-
-	if (!shader) {
-		throw ShaderCreationException();
-	}
-
-	ifstream file(path);
-	if (!file.is_open()) {
-		throw ShaderNotFoundException(path);
-	}
-
-	stringstream buf;
-	buf << file.rdbuf();
-	string source = buf.str();
-	const char *source_char = source.c_str();
-	glShaderSource(shader, 1, &source_char, NULL);
-
-	glCompileShader(shader);
-	GLint status = 0;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-	if (status == GL_FALSE) {
-		throw ShaderCompilationException(shader);
-	}
-
-	return shader;
-}
-
-Material::Material(const char *vert_path, const char *frag_path) {
-	// Delete the program that is alreay linked
-	// todo: this is terribly inefficient when there alreay is a compiled version of vertex and fragment shaders. 
-	glDeleteProgram(program);
-
-	GLuint vert_shader;
-	GLuint frag_shader;
-
-	// Compile shaders
-	try {
-		vert_shader = CompileShader(vert_path, GL_VERTEX_SHADER);
-		frag_shader = CompileShader(frag_path, GL_FRAGMENT_SHADER);
-	}
-	catch (exception& e) {
+Material::Material(const Shader *vert_shader, const Shader *frag_shader) {
+	if (vert_shader->GetType() != GL_VERTEX_SHADER ||
+		frag_shader->GetType() != GL_FRAGMENT_SHADER) {
 #ifdef DEBUG
-		cout << e.what() << endl;
+		cout << '[' << __FUNCTION__ << ']' << " shader type mismatch occurred";
 #endif
-		return;
+		throw std::exception();
 	}
-
-	// Attach shaders and Link the program
+	
+	// attach shaders and link
 	program = glCreateProgram();
-	glAttachShader(program, vert_shader);
-	glAttachShader(program, frag_shader);
+	glAttachShader(program, vert_shader->GetId());
+	glAttachShader(program, frag_shader->GetId());
 	glLinkProgram(program);
-	glDeleteShader(vert_shader);
-	glDeleteShader(frag_shader);
-
-#ifdef DEBUG
-	cout << '[' << __FUNCTION__ << ']'
-		<< "{vertex shader: " << vert_path << " fragment shader: " << frag_path << '}'
-		<< " Material created." << endl;
-#endif
 }
 
 Material::~Material() {
 	glDeleteProgram(program);
 }
+
+/*
+const int* Material::GetInteger(const char *name) const {
+	auto it = ints.find(name);
+	if (it == ints.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+const std::vector<int>* Material::GetIntegerArray(const char *name) const {
+	auto it = intarrs.find(name);
+	if (it == intarrs.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+const float* Material::GetFloat(const char *name) const {
+	auto it = floats.find(name);
+	if (it == floats.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+const std::vector<float>* Material::GetFloatArray(const char *name) const {
+	auto it = floatarrs.find(name);
+	if (it == floatarrs.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+const vec4* Material::GetVector(const char *name) const {
+	auto it = vecs.find(name);
+	if (it == vecs.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+const std::vector<vec4>* Material::GetVectorArray(const char *name) const {
+	auto it = vecarrs.find(name);
+	if (it == vecarrs.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+const mat4* Material::GetMatrix(const char *name) const {
+	auto it = mats.find(name);
+	if (it == mats.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+const std::vector<mat4>* Material::GetMatrixArray(const char *name) const {
+	auto it = matarrs.find(name);
+	if (it == matarrs.end()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+void Material::SetInteger(const char *name, int value) {
+	ints.insert_or_assign(name, value);
+}
+
+void Material::SetIntegerArray(const char *name, const int *value, int length) {
+	intarrs.insert_or_assign(name, move(vector<int>(value, value + length)));
+}
+
+void Material::SetFloat(const char *name, float value) {
+	floats.insert_or_assign(name, value);
+}
+
+void Material::SetFloatArray(const char *name, const float *value, int length) {
+	floatarrs.insert_or_assign(name, move(vector<float>(value, value + length)));
+}
+
+void Material::SetVector(const char *name, const vec4 &value) {
+	vecs.insert_or_assign(name, value);
+}
+
+void Material::SetVectorArray(const char *name, const vec4 *value, int length) {
+	vecarrs.insert_or_assign(name, move(vector<vec4>(value, value + length)));
+}
+
+void Material::SetMatrix(const char *name, const mat4 &value) {
+	mats.insert_or_assign(name, value);
+}
+
+void Material::SetMatrixArray(const char *name, const mat4 *value, int length) {
+	matarrs.insert_or_assign(name, move(vector<mat4>(value, value + length)));
+}
+
+void Material::UpdateUniforms() {
+	GLuint location;
+	for (auto &it : ints) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform1i(location, it.second);
+	}
+	for (auto &it : intarrs) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform1iv(location, it.second.size(), &it.second[0]);
+	}
+	for (auto &it : floats) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform1f(location, it.second);
+	}
+	for (auto &it : floatarrs) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform1fv(location, it.second.size(), &it.second[0]);
+	}
+	for (auto &it : vecs) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform4fv(location, 1, (const GLfloat *)&it.second);
+	}
+	for (auto &it : vecarrs) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform1fv(location, it.second.size(), (const GLfloat *)&it.second[0]);
+	}
+	for (auto &it : mats) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform4fv(location, 1, (const GLfloat *)&it.second);
+	}
+	for (auto &it : matarrs) {
+		location = glGetUniformLocation(program, it.first.c_str());
+		glUniform1fv(location, it.second.size(), (const GLfloat *)&it.second[0]);
+	}
+}
+*/

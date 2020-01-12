@@ -9,15 +9,18 @@ namespace Engine {
 	private:
 		GameObject ^m_gameObject;
 
-	public:
+	internal:
 		Script(GameObject ^gameObject);
 
+	public:
 		property GameObject ^gameObject {
 			virtual GameObject ^get() {
 				return m_gameObject;
 			}
 		}
 		
+		virtual void Destroy() override;
+
 		virtual void Start() = 0;
 		virtual void Update() = 0;
 	};

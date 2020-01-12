@@ -1,11 +1,16 @@
+/*
 #include <Graphics/Mesh.hpp>
 
 using namespace System;
 using namespace Engine;
 
+static Mesh::Mesh() {
+	m_meshes = gcnew System::Collections::Generic::Dictionary<System::String^, Mesh^>();
+}
+
 Mesh^ Mesh::Find(String ^name) {
 	Mesh^ mesh;
-	m_meshes.TryGetValue(name, mesh);
+	m_meshes->TryGetValue(name, mesh);
 	return mesh;
 }
 
@@ -20,17 +25,17 @@ Mesh::Mesh(array<float> ^vert, array<int> ^attrib, array<int> ^idx)
 }
 
 Mesh::Mesh(String ^name, array<float> ^vert, array<int> ^attrib)
-	: ManagedObject<Core::Mesh>(new Core::Mesh(&vert[0], vert->Length, &attrib[0], attrib->Length)) {
-	m_name = name;
-	m_meshes.Add(m_name, this);
+	: ManagedObject<Core::Mesh>(new Core::Mesh(&vert[0], vert->Length, &attrib[0], attrib->Length)), m_name(name) {
+	m_meshes->Add(m_name, this);
 }
 
 Mesh::Mesh(String ^name, array<float> ^vert, array<int> ^attrib, array<int> ^idx)
-	: ManagedObject<Core::Mesh>(new Core::Mesh(&vert[0], vert->Length, &attrib[0], attrib->Length, &idx[0], idx->Length)) {
-	m_meshes.Add(m_name, this);
+	: ManagedObject<Core::Mesh>(new Core::Mesh(&vert[0], vert->Length, &attrib[0], attrib->Length, &idx[0], idx->Length)), m_name(name) {
+	m_meshes->Add(m_name, this);
 }
 
 void Mesh::Destroy() {
-	m_meshes.Remove(m_name);
+	m_meshes->Remove(m_name);
 	ManagedObject<Core::Mesh>::Destroy();
 }
+*/

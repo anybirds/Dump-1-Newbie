@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 
 #include <SOIL/SOIL.h>
@@ -12,13 +13,14 @@
 using namespace std;
 using namespace Core;
 
-Texture::Texture(const char *texture_path) {
+Texture::Texture(const char *path) {
 	int width, height, channel;
-	unsigned char *image = SOIL_load_image(texture_path, &width, &height, &channel, SOIL_LOAD_AUTO);
+	unsigned char *image = SOIL_load_image(path, &width, &height, &channel, SOIL_LOAD_AUTO);
 	if (!image) {
 #ifdef DEBUG
-		cout << '[' << __FUNCTION__ << ']' << " cannot load image file: " << texture_path << '\n';
+		cout << '[' << __FUNCTION__ << ']' << " cannot load image file: " << path << '\n';
 #endif
+		throw exception();
 	}
 
 	glGenTextures(1, &id);

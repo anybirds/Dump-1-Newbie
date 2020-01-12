@@ -10,6 +10,10 @@ namespace Engine {
 	
 	ref class Transform;
 
+	/*
+	Featured by its normalization matrix.
+	Specify camera properties by directly manipulating the normalization matrix.
+	 */
 	public ref class Camera sealed : public ManagedObject<Core::Camera>, public IComponent {
 	private:
 		static Camera ^m_current;
@@ -45,7 +49,7 @@ namespace Engine {
 		}
 
 		property GameObject ^gameObject {
-			virtual GameObject ^get() override {
+			virtual GameObject ^get() {
 				return m_gameObject;
 			}
 		}

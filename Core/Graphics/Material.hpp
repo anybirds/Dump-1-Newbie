@@ -1,68 +1,57 @@
 #pragma once
 
 #include <exception>
+#include <unordered_map>
 #include <string>
+#include <vector>
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
 namespace Core {
 
-	class ShaderCreationException final : public std::exception {
-	public:
-		const char *what() const noexcept {
-			return "[ShaderCreationException] Failed to create a new shader.";
-		}
-	};
+	class Shader;
+	class Texture;
 
-	class ShaderNotFoundException final : public std::exception {
-	private:
-		std::string msg;
-	public:
-		ShaderNotFoundException(const char *file_name) : msg("[ShaderNotFoundException] Failed to find a shader: ") {
-			msg += file_name;
-		}
-
-		const char *what() const noexcept {
-			return msg.c_str();
-		}
-	};
-
-	class ShaderCompilationException : public std::exception {
-	private:
-		std::string msg;
-	public:
-		ShaderCompilationException(GLuint shader) : msg("[ShaderCompilationException] Failed to Compile a shader:\n") {
-			GLint len;
-			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
-			GLchar *log = new GLchar[len + 1];
-			glGetShaderInfoLog(shader, len, NULL, log);
-
-			msg += log;
-
-			delete[] log;
-		}
-
-		const char *what() const noexcept {
-			return msg.c_str();
-		}
-	};
-
-	/*
-	Defines how a Mesh is being drawn.
-	Automatically compiles given shaders and attach it to a program object, which gets linked right after.
-	Inherit this class to create a new material with additional properties.
-	 */
-	class Material {
+	class Material final {
 	private:
 		GLuint program;
+		
+		/*
+		std::unordered_map<std::string, int> ints;
+		std::unordered_map<std::string, std::vector<int>> intarrs;
+		std::unordered_map<std::string, float> floats;
+		std::unordered_map<std::string, std::vector<float>> floatarrs;
+		std::unordered_map<std::string, glm::vec4> vecs;
+		std::unordered_map<std::string, std::vector<glm::vec4>> vecarrs;
+		std::unordered_map<std::string, glm::mat4> mats;
+		std::unordered_map<std::string, std::vector<glm::mat4>> matarrs;
+		*/
 
-		GLuint CompileShader(const char *path, GLenum type);
 	public:
-		Material(const char *vert_path, const char *frag_path);
-		virtual ~Material();
-		virtual void Uniform() const = 0;
+		Material(const Shader *vert_shader, const Shader *frag_shader);
+		~Material();
 
-		friend class Renderer;
+		/*
+		const int* GetInteger(const char *name) const;
+		const std::vector<int>* GetIntegerArray(const char *name) const;
+		const float* GetFloat(const char *name) const;
+		const std::vector<float>* GetFloatArray(const char *name) const;
+		const glm::vec4* GetVector(const char *name) const;
+		const std::vector<glm::vec4>* GetVectorArray(const char *name) const;
+		const glm::mat4* GetMatrix(const char *name) const;
+		const std::vector<glm::mat4>* GetMatrixArray(const char *name) const;
+
+		void SetInteger(const char *name, int value);
+		void SetIntegerArray(const char *name, const int *value, int length);
+		void SetFloat(const char *name, float value);
+		void SetFloatArray(const char *name, const float *value, int length);
+		void SetVector(const char *name, const glm::vec4 &value);
+		void SetVectorArray(const char *name, const glm::vec4 *value, int length);
+		void SetMatrix(const char *name, const glm::mat4 &value);
+		void SetMatrixArray(const char *name, const glm::mat4 *value, int length);
+		*/
+
+		GLuint GetProgram() const { return program; }
 	};
 }

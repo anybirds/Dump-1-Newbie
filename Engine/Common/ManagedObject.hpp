@@ -7,7 +7,7 @@ namespace Engine {
 		T *m_instance;
 		
 	protected:
-		ManagedObject(T *instance) : instance(instance) {}
+		ManagedObject(T *instance) : m_instance(instance) {}
 
 	public:
 		virtual ~ManagedObject() {

@@ -1,11 +1,9 @@
 #pragma once
 
-#include <Common/Component.hpp>
-
 namespace Core {
-	class Script final : public Component {
+	class Script final {
 	public:
-		Script(GameObject *object);
+		Script();
 		~Script();
 	};
 }

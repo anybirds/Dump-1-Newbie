@@ -8,6 +8,9 @@ namespace Engine {
 	ref class Mesh;
 	ref class Material;
 
+	/*
+	Responsible for rendering GameObjects that have Mesh and Material.
+	*/
 	public ref class Renderer : public ManagedObject<Core::Renderer>, public IComponent {
 	private:
 		GameObject ^m_gameObject;
@@ -15,6 +18,7 @@ namespace Engine {
 		Material ^m_material;
 
 	internal:
+		/*creating an instance of component is only possible by GameObject::AddComponent*/
 		Renderer(GameObject ^gameObject);
 
 	public:
@@ -41,7 +45,7 @@ namespace Engine {
 		}
 
 		property GameObject ^gameObject {
-			virtual GameObject ^get() override {
+			virtual GameObject ^get() {
 				return m_gameObject;
 			}
 		}

@@ -62,3 +62,7 @@ void Window::SwapBuffers() {
 	glfwSwapBuffers(m_window);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // move this to framebuffer specification
 }
+
+void Window::PollEvents() {
+	glfwPollEvents();
+}

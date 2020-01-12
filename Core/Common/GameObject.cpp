@@ -7,7 +7,7 @@
 
 using namespace Core;
 
-GameObject::GameObject(Transform *transform) : transform(transform) {
+GameObject::GameObject() {
 	
 }
 

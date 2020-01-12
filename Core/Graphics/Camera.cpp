@@ -10,7 +10,7 @@ using namespace Core;
 
 const Camera *Camera::current;
 
-Camera::Camera(GameObject *object, const mat4 &normalization) : Component(object), normalization(normalization) {
+Camera::Camera(const mat4 &normalization) : normalization(normalization) {
 	
 }
 

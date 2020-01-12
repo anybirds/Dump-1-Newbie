@@ -11,6 +11,6 @@ namespace Core {
 	class Model final {
 	public:
 		/* Import a model and create all meshes it has */
-		static bool Import(const char *model_path);
+		static bool Import(const char *path);
 	};
 }

@@ -5,8 +5,8 @@
 
 namespace Engine {
 
-	ref class Transform;
 	interface class IComponent;
+	ref class Transform;
 
 	/*
 	An abstraction of an object in the scene.
@@ -14,15 +14,16 @@ namespace Engine {
 	*/
 	public ref class GameObject sealed : public ManagedObject<Core::GameObject> {
 	private:
-		static System::Collections::Generic::Dictionary<System::String^, GameObject^> m_gameObjects;
+		static System::Collections::Generic::Dictionary<System::String^, GameObject^> ^m_gameObjects;
 
 	public:
+		static GameObject();
 		static GameObject^ Find(System::String ^name);
 
 	private:
 		System::String ^m_name;
 		Transform ^m_transform;
-		System::Collections::Generic::Dictionary<System::Type^, IComponent^> m_components;
+		System::Collections::Generic::Dictionary<System::Type^, IComponent^> ^m_components;
 		
 	internal:
 		template <typename T> bool RemoveComponent();
@@ -41,9 +42,9 @@ namespace Engine {
 				return m_name;
 			}
 			void set(System::String ^value) {
-				m_gameObjects.Remove(m_name);
+				m_gameObjects->Remove(m_name);
 				m_name = value;
-				m_gameObjects.Add(m_name, this);
+				m_gameObjects->Add(m_name, this);
 			}
 		}
 		
@@ -51,21 +52,18 @@ namespace Engine {
 			Transform ^get() {
 				return m_transform;
 			}
-			void set(Transform ^value) {
-				m_transform = value;
-			}
 		}
 	};
 
 	template <typename T>
 	bool GameObject::RemoveComponent() {
-		return m_components.Remove(T::typeid);
+		return m_components->Remove(T::typeid);
 	}
 
 	template <typename T>
 	T^ GameObject::GetComponent() {
 		Component ^component;
-		m_components.TryGetValue(T::typeid, component);
+		m_components->TryGetValue(T::typeid, component);
 		return dynamic_cast<T>(component);
 	}
 

@@ -8,18 +8,5 @@ using Engine;
 
 namespace Custom
 {
-    class RotateScript : Script
-    {
-        private float Rate { get; set; }
-        
-        public override void Start()
-        {
 
-        }
-
-        public override void Update()
-        {
-
-        }
-    }
 }
